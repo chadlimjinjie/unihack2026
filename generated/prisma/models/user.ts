@@ -231,7 +231,7 @@ export type userWhereInput = {
   banReason?: Prisma.StringNullableFilter<"user"> | string | null
   banExpires?: Prisma.DateTimeNullableFilter<"user"> | Date | string | null
   account?: Prisma.AccountListRelationFilter
-  review?: Prisma.XOR<Prisma.ReviewNullableScalarRelationFilter, Prisma.reviewWhereInput> | null
+  review?: Prisma.ReviewListRelationFilter
   session?: Prisma.SessionListRelationFilter
 }
 
@@ -248,7 +248,7 @@ export type userOrderByWithRelationInput = {
   banReason?: Prisma.SortOrderInput | Prisma.SortOrder
   banExpires?: Prisma.SortOrderInput | Prisma.SortOrder
   account?: Prisma.accountOrderByRelationAggregateInput
-  review?: Prisma.reviewOrderByWithRelationInput
+  review?: Prisma.reviewOrderByRelationAggregateInput
   session?: Prisma.sessionOrderByRelationAggregateInput
 }
 
@@ -268,7 +268,7 @@ export type userWhereUniqueInput = Prisma.AtLeast<{
   banReason?: Prisma.StringNullableFilter<"user"> | string | null
   banExpires?: Prisma.DateTimeNullableFilter<"user"> | Date | string | null
   account?: Prisma.AccountListRelationFilter
-  review?: Prisma.XOR<Prisma.ReviewNullableScalarRelationFilter, Prisma.reviewWhereInput> | null
+  review?: Prisma.ReviewListRelationFilter
   session?: Prisma.SessionListRelationFilter
 }, "id" | "email">
 
@@ -319,7 +319,7 @@ export type userCreateInput = {
   banReason?: string | null
   banExpires?: Date | string | null
   account?: Prisma.accountCreateNestedManyWithoutUserInput
-  review?: Prisma.reviewCreateNestedOneWithoutUserInput
+  review?: Prisma.reviewCreateNestedManyWithoutUserInput
   session?: Prisma.sessionCreateNestedManyWithoutUserInput
 }
 
@@ -336,7 +336,7 @@ export type userUncheckedCreateInput = {
   banReason?: string | null
   banExpires?: Date | string | null
   account?: Prisma.accountUncheckedCreateNestedManyWithoutUserInput
-  review?: Prisma.reviewUncheckedCreateNestedOneWithoutUserInput
+  review?: Prisma.reviewUncheckedCreateNestedManyWithoutUserInput
   session?: Prisma.sessionUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -353,7 +353,7 @@ export type userUpdateInput = {
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   account?: Prisma.accountUpdateManyWithoutUserNestedInput
-  review?: Prisma.reviewUpdateOneWithoutUserNestedInput
+  review?: Prisma.reviewUpdateManyWithoutUserNestedInput
   session?: Prisma.sessionUpdateManyWithoutUserNestedInput
 }
 
@@ -370,7 +370,7 @@ export type userUncheckedUpdateInput = {
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   account?: Prisma.accountUncheckedUpdateManyWithoutUserNestedInput
-  review?: Prisma.reviewUncheckedUpdateOneWithoutUserNestedInput
+  review?: Prisma.reviewUncheckedUpdateManyWithoutUserNestedInput
   session?: Prisma.sessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -532,7 +532,7 @@ export type userCreateWithoutAccountInput = {
   banned?: boolean | null
   banReason?: string | null
   banExpires?: Date | string | null
-  review?: Prisma.reviewCreateNestedOneWithoutUserInput
+  review?: Prisma.reviewCreateNestedManyWithoutUserInput
   session?: Prisma.sessionCreateNestedManyWithoutUserInput
 }
 
@@ -548,7 +548,7 @@ export type userUncheckedCreateWithoutAccountInput = {
   banned?: boolean | null
   banReason?: string | null
   banExpires?: Date | string | null
-  review?: Prisma.reviewUncheckedCreateNestedOneWithoutUserInput
+  review?: Prisma.reviewUncheckedCreateNestedManyWithoutUserInput
   session?: Prisma.sessionUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -580,7 +580,7 @@ export type userUpdateWithoutAccountInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  review?: Prisma.reviewUpdateOneWithoutUserNestedInput
+  review?: Prisma.reviewUpdateManyWithoutUserNestedInput
   session?: Prisma.sessionUpdateManyWithoutUserNestedInput
 }
 
@@ -596,7 +596,7 @@ export type userUncheckedUpdateWithoutAccountInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  review?: Prisma.reviewUncheckedUpdateOneWithoutUserNestedInput
+  review?: Prisma.reviewUncheckedUpdateManyWithoutUserNestedInput
   session?: Prisma.sessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -693,7 +693,7 @@ export type userCreateWithoutSessionInput = {
   banReason?: string | null
   banExpires?: Date | string | null
   account?: Prisma.accountCreateNestedManyWithoutUserInput
-  review?: Prisma.reviewCreateNestedOneWithoutUserInput
+  review?: Prisma.reviewCreateNestedManyWithoutUserInput
 }
 
 export type userUncheckedCreateWithoutSessionInput = {
@@ -709,7 +709,7 @@ export type userUncheckedCreateWithoutSessionInput = {
   banReason?: string | null
   banExpires?: Date | string | null
   account?: Prisma.accountUncheckedCreateNestedManyWithoutUserInput
-  review?: Prisma.reviewUncheckedCreateNestedOneWithoutUserInput
+  review?: Prisma.reviewUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type userCreateOrConnectWithoutSessionInput = {
@@ -741,7 +741,7 @@ export type userUpdateWithoutSessionInput = {
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   account?: Prisma.accountUpdateManyWithoutUserNestedInput
-  review?: Prisma.reviewUpdateOneWithoutUserNestedInput
+  review?: Prisma.reviewUpdateManyWithoutUserNestedInput
 }
 
 export type userUncheckedUpdateWithoutSessionInput = {
@@ -757,7 +757,7 @@ export type userUncheckedUpdateWithoutSessionInput = {
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   account?: Prisma.accountUncheckedUpdateManyWithoutUserNestedInput
-  review?: Prisma.reviewUncheckedUpdateOneWithoutUserNestedInput
+  review?: Prisma.reviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -767,11 +767,13 @@ export type userUncheckedUpdateWithoutSessionInput = {
 
 export type UserCountOutputType = {
   account: number
+  review: number
   session: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | UserCountOutputTypeCountAccountArgs
+  review?: boolean | UserCountOutputTypeCountReviewArgs
   session?: boolean | UserCountOutputTypeCountSessionArgs
 }
 
@@ -790,6 +792,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.accountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.reviewWhereInput
 }
 
 /**
@@ -874,7 +883,7 @@ export type $userPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "user"
   objects: {
     account: Prisma.$accountPayload<ExtArgs>[]
-    review: Prisma.$reviewPayload<ExtArgs> | null
+    review: Prisma.$reviewPayload<ExtArgs>[]
     session: Prisma.$sessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1284,7 +1293,7 @@ readonly fields: userFieldRefs;
 export interface Prisma__userClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   account<T extends Prisma.user$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$accountArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$accountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  review<T extends Prisma.user$reviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$reviewArgs<ExtArgs>>): Prisma.Prisma__reviewClient<runtime.Types.Result.GetResult<Prisma.$reviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  review<T extends Prisma.user$reviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$reviewArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$reviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   session<T extends Prisma.user$sessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$sessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1759,6 +1768,11 @@ export type user$reviewArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   include?: Prisma.reviewInclude<ExtArgs> | null
   where?: Prisma.reviewWhereInput
+  orderBy?: Prisma.reviewOrderByWithRelationInput | Prisma.reviewOrderByWithRelationInput[]
+  cursor?: Prisma.reviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
 }
 
 /**

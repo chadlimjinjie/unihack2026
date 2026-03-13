@@ -29,11 +29,13 @@ export type AggregateReview = {
 export type ReviewAvgAggregateOutputType = {
   id: number | null
   court_id: number | null
+  stars: number | null
 }
 
 export type ReviewSumAggregateOutputType = {
   id: bigint | null
   court_id: bigint | null
+  stars: number | null
 }
 
 export type ReviewMinAggregateOutputType = {
@@ -42,6 +44,8 @@ export type ReviewMinAggregateOutputType = {
   updated_at: Date | null
   court_id: bigint | null
   user_id: string | null
+  thoughts: string | null
+  stars: number | null
 }
 
 export type ReviewMaxAggregateOutputType = {
@@ -50,6 +54,8 @@ export type ReviewMaxAggregateOutputType = {
   updated_at: Date | null
   court_id: bigint | null
   user_id: string | null
+  thoughts: string | null
+  stars: number | null
 }
 
 export type ReviewCountAggregateOutputType = {
@@ -58,6 +64,8 @@ export type ReviewCountAggregateOutputType = {
   updated_at: number
   court_id: number
   user_id: number
+  thoughts: number
+  stars: number
   _all: number
 }
 
@@ -65,11 +73,13 @@ export type ReviewCountAggregateOutputType = {
 export type ReviewAvgAggregateInputType = {
   id?: true
   court_id?: true
+  stars?: true
 }
 
 export type ReviewSumAggregateInputType = {
   id?: true
   court_id?: true
+  stars?: true
 }
 
 export type ReviewMinAggregateInputType = {
@@ -78,6 +88,8 @@ export type ReviewMinAggregateInputType = {
   updated_at?: true
   court_id?: true
   user_id?: true
+  thoughts?: true
+  stars?: true
 }
 
 export type ReviewMaxAggregateInputType = {
@@ -86,6 +98,8 @@ export type ReviewMaxAggregateInputType = {
   updated_at?: true
   court_id?: true
   user_id?: true
+  thoughts?: true
+  stars?: true
 }
 
 export type ReviewCountAggregateInputType = {
@@ -94,6 +108,8 @@ export type ReviewCountAggregateInputType = {
   updated_at?: true
   court_id?: true
   user_id?: true
+  thoughts?: true
+  stars?: true
   _all?: true
 }
 
@@ -189,6 +205,8 @@ export type ReviewGroupByOutputType = {
   updated_at: Date | null
   court_id: bigint | null
   user_id: string | null
+  thoughts: string | null
+  stars: number | null
   _count: ReviewCountAggregateOutputType | null
   _avg: ReviewAvgAggregateOutputType | null
   _sum: ReviewSumAggregateOutputType | null
@@ -220,6 +238,8 @@ export type reviewWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"review"> | Date | string | null
   court_id?: Prisma.BigIntNullableFilter<"review"> | bigint | number | null
   user_id?: Prisma.StringNullableFilter<"review"> | string | null
+  thoughts?: Prisma.StringNullableFilter<"review"> | string | null
+  stars?: Prisma.IntNullableFilter<"review"> | number | null
   court?: Prisma.XOR<Prisma.CourtNullableScalarRelationFilter, Prisma.courtWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.userWhereInput> | null
 }
@@ -230,22 +250,27 @@ export type reviewOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   court_id?: Prisma.SortOrderInput | Prisma.SortOrder
   user_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  thoughts?: Prisma.SortOrderInput | Prisma.SortOrder
+  stars?: Prisma.SortOrderInput | Prisma.SortOrder
   court?: Prisma.courtOrderByWithRelationInput
   user?: Prisma.userOrderByWithRelationInput
 }
 
 export type reviewWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
-  user_id?: string
+  user_id_court_id?: Prisma.reviewUser_idCourt_idCompoundUniqueInput
   AND?: Prisma.reviewWhereInput | Prisma.reviewWhereInput[]
   OR?: Prisma.reviewWhereInput[]
   NOT?: Prisma.reviewWhereInput | Prisma.reviewWhereInput[]
   created_at?: Prisma.DateTimeFilter<"review"> | Date | string
   updated_at?: Prisma.DateTimeNullableFilter<"review"> | Date | string | null
   court_id?: Prisma.BigIntNullableFilter<"review"> | bigint | number | null
+  user_id?: Prisma.StringNullableFilter<"review"> | string | null
+  thoughts?: Prisma.StringNullableFilter<"review"> | string | null
+  stars?: Prisma.IntNullableFilter<"review"> | number | null
   court?: Prisma.XOR<Prisma.CourtNullableScalarRelationFilter, Prisma.courtWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.userWhereInput> | null
-}, "id" | "user_id">
+}, "id" | "user_id_court_id">
 
 export type reviewOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -253,6 +278,8 @@ export type reviewOrderByWithAggregationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   court_id?: Prisma.SortOrderInput | Prisma.SortOrder
   user_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  thoughts?: Prisma.SortOrderInput | Prisma.SortOrder
+  stars?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.reviewCountOrderByAggregateInput
   _avg?: Prisma.reviewAvgOrderByAggregateInput
   _max?: Prisma.reviewMaxOrderByAggregateInput
@@ -269,12 +296,16 @@ export type reviewScalarWhereWithAggregatesInput = {
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"review"> | Date | string | null
   court_id?: Prisma.BigIntNullableWithAggregatesFilter<"review"> | bigint | number | null
   user_id?: Prisma.StringNullableWithAggregatesFilter<"review"> | string | null
+  thoughts?: Prisma.StringNullableWithAggregatesFilter<"review"> | string | null
+  stars?: Prisma.IntNullableWithAggregatesFilter<"review"> | number | null
 }
 
 export type reviewCreateInput = {
   id?: bigint | number
   created_at?: Date | string
   updated_at?: Date | string | null
+  thoughts?: string | null
+  stars?: number | null
   court?: Prisma.courtCreateNestedOneWithoutReviewInput
   user?: Prisma.userCreateNestedOneWithoutReviewInput
 }
@@ -285,12 +316,16 @@ export type reviewUncheckedCreateInput = {
   updated_at?: Date | string | null
   court_id?: bigint | number | null
   user_id?: string | null
+  thoughts?: string | null
+  stars?: number | null
 }
 
 export type reviewUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   court?: Prisma.courtUpdateOneWithoutReviewNestedInput
   user?: Prisma.userUpdateOneWithoutReviewNestedInput
 }
@@ -301,6 +336,8 @@ export type reviewUncheckedUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   court_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type reviewCreateManyInput = {
@@ -309,12 +346,16 @@ export type reviewCreateManyInput = {
   updated_at?: Date | string | null
   court_id?: bigint | number | null
   user_id?: string | null
+  thoughts?: string | null
+  stars?: number | null
 }
 
 export type reviewUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type reviewUncheckedUpdateManyInput = {
@@ -323,6 +364,8 @@ export type reviewUncheckedUpdateManyInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   court_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ReviewListRelationFilter = {
@@ -335,17 +378,25 @@ export type reviewOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type reviewUser_idCourt_idCompoundUniqueInput = {
+  user_id: string
+  court_id: bigint | number
+}
+
 export type reviewCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   court_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  thoughts?: Prisma.SortOrder
+  stars?: Prisma.SortOrder
 }
 
 export type reviewAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   court_id?: Prisma.SortOrder
+  stars?: Prisma.SortOrder
 }
 
 export type reviewMaxOrderByAggregateInput = {
@@ -354,6 +405,8 @@ export type reviewMaxOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   court_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  thoughts?: Prisma.SortOrder
+  stars?: Prisma.SortOrder
 }
 
 export type reviewMinOrderByAggregateInput = {
@@ -362,16 +415,14 @@ export type reviewMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   court_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  thoughts?: Prisma.SortOrder
+  stars?: Prisma.SortOrder
 }
 
 export type reviewSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   court_id?: Prisma.SortOrder
-}
-
-export type ReviewNullableScalarRelationFilter = {
-  is?: Prisma.reviewWhereInput | null
-  isNot?: Prisma.reviewWhereInput | null
+  stars?: Prisma.SortOrder
 }
 
 export type reviewCreateNestedManyWithoutCourtInput = {
@@ -416,6 +467,14 @@ export type reviewUncheckedUpdateManyWithoutCourtNestedInput = {
   deleteMany?: Prisma.reviewScalarWhereInput | Prisma.reviewScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type NullableBigIntFieldUpdateOperationsInput = {
   set?: bigint | number | null
   increment?: bigint | number
@@ -424,42 +483,54 @@ export type NullableBigIntFieldUpdateOperationsInput = {
   divide?: bigint | number
 }
 
-export type reviewCreateNestedOneWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput
-  connect?: Prisma.reviewWhereUniqueInput
+export type reviewCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput> | Prisma.reviewCreateWithoutUserInput[] | Prisma.reviewUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput | Prisma.reviewCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.reviewCreateManyUserInputEnvelope
+  connect?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
 }
 
-export type reviewUncheckedCreateNestedOneWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput
-  connect?: Prisma.reviewWhereUniqueInput
+export type reviewUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput> | Prisma.reviewCreateWithoutUserInput[] | Prisma.reviewUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput | Prisma.reviewCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.reviewCreateManyUserInputEnvelope
+  connect?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
 }
 
-export type reviewUpdateOneWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput
-  upsert?: Prisma.reviewUpsertWithoutUserInput
-  disconnect?: Prisma.reviewWhereInput | boolean
-  delete?: Prisma.reviewWhereInput | boolean
-  connect?: Prisma.reviewWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.reviewUpdateToOneWithWhereWithoutUserInput, Prisma.reviewUpdateWithoutUserInput>, Prisma.reviewUncheckedUpdateWithoutUserInput>
+export type reviewUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput> | Prisma.reviewCreateWithoutUserInput[] | Prisma.reviewUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput | Prisma.reviewCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.reviewUpsertWithWhereUniqueWithoutUserInput | Prisma.reviewUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.reviewCreateManyUserInputEnvelope
+  set?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  disconnect?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  delete?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  connect?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  update?: Prisma.reviewUpdateWithWhereUniqueWithoutUserInput | Prisma.reviewUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.reviewUpdateManyWithWhereWithoutUserInput | Prisma.reviewUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.reviewScalarWhereInput | Prisma.reviewScalarWhereInput[]
 }
 
-export type reviewUncheckedUpdateOneWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput
-  upsert?: Prisma.reviewUpsertWithoutUserInput
-  disconnect?: Prisma.reviewWhereInput | boolean
-  delete?: Prisma.reviewWhereInput | boolean
-  connect?: Prisma.reviewWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.reviewUpdateToOneWithWhereWithoutUserInput, Prisma.reviewUpdateWithoutUserInput>, Prisma.reviewUncheckedUpdateWithoutUserInput>
+export type reviewUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput> | Prisma.reviewCreateWithoutUserInput[] | Prisma.reviewUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput | Prisma.reviewCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.reviewUpsertWithWhereUniqueWithoutUserInput | Prisma.reviewUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.reviewCreateManyUserInputEnvelope
+  set?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  disconnect?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  delete?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  connect?: Prisma.reviewWhereUniqueInput | Prisma.reviewWhereUniqueInput[]
+  update?: Prisma.reviewUpdateWithWhereUniqueWithoutUserInput | Prisma.reviewUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.reviewUpdateManyWithWhereWithoutUserInput | Prisma.reviewUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.reviewScalarWhereInput | Prisma.reviewScalarWhereInput[]
 }
 
 export type reviewCreateWithoutCourtInput = {
   id?: bigint | number
   created_at?: Date | string
   updated_at?: Date | string | null
+  thoughts?: string | null
+  stars?: number | null
   user?: Prisma.userCreateNestedOneWithoutReviewInput
 }
 
@@ -468,6 +539,8 @@ export type reviewUncheckedCreateWithoutCourtInput = {
   created_at?: Date | string
   updated_at?: Date | string | null
   user_id?: string | null
+  thoughts?: string | null
+  stars?: number | null
 }
 
 export type reviewCreateOrConnectWithoutCourtInput = {
@@ -505,12 +578,16 @@ export type reviewScalarWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"review"> | Date | string | null
   court_id?: Prisma.BigIntNullableFilter<"review"> | bigint | number | null
   user_id?: Prisma.StringNullableFilter<"review"> | string | null
+  thoughts?: Prisma.StringNullableFilter<"review"> | string | null
+  stars?: Prisma.IntNullableFilter<"review"> | number | null
 }
 
 export type reviewCreateWithoutUserInput = {
   id?: bigint | number
   created_at?: Date | string
   updated_at?: Date | string | null
+  thoughts?: string | null
+  stars?: number | null
   court?: Prisma.courtCreateNestedOneWithoutReviewInput
 }
 
@@ -519,6 +596,8 @@ export type reviewUncheckedCreateWithoutUserInput = {
   created_at?: Date | string
   updated_at?: Date | string | null
   court_id?: bigint | number | null
+  thoughts?: string | null
+  stars?: number | null
 }
 
 export type reviewCreateOrConnectWithoutUserInput = {
@@ -526,29 +605,25 @@ export type reviewCreateOrConnectWithoutUserInput = {
   create: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput>
 }
 
-export type reviewUpsertWithoutUserInput = {
-  update: Prisma.XOR<Prisma.reviewUpdateWithoutUserInput, Prisma.reviewUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput>
-  where?: Prisma.reviewWhereInput
+export type reviewCreateManyUserInputEnvelope = {
+  data: Prisma.reviewCreateManyUserInput | Prisma.reviewCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
-export type reviewUpdateToOneWithWhereWithoutUserInput = {
-  where?: Prisma.reviewWhereInput
+export type reviewUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.reviewWhereUniqueInput
+  update: Prisma.XOR<Prisma.reviewUpdateWithoutUserInput, Prisma.reviewUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput>
+}
+
+export type reviewUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.reviewWhereUniqueInput
   data: Prisma.XOR<Prisma.reviewUpdateWithoutUserInput, Prisma.reviewUncheckedUpdateWithoutUserInput>
 }
 
-export type reviewUpdateWithoutUserInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  court?: Prisma.courtUpdateOneWithoutReviewNestedInput
-}
-
-export type reviewUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  court_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+export type reviewUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.reviewScalarWhereInput
+  data: Prisma.XOR<Prisma.reviewUpdateManyMutationInput, Prisma.reviewUncheckedUpdateManyWithoutUserInput>
 }
 
 export type reviewCreateManyCourtInput = {
@@ -556,12 +631,16 @@ export type reviewCreateManyCourtInput = {
   created_at?: Date | string
   updated_at?: Date | string | null
   user_id?: string | null
+  thoughts?: string | null
+  stars?: number | null
 }
 
 export type reviewUpdateWithoutCourtInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   user?: Prisma.userUpdateOneWithoutReviewNestedInput
 }
 
@@ -570,6 +649,8 @@ export type reviewUncheckedUpdateWithoutCourtInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type reviewUncheckedUpdateManyWithoutCourtInput = {
@@ -577,6 +658,44 @@ export type reviewUncheckedUpdateManyWithoutCourtInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type reviewCreateManyUserInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  updated_at?: Date | string | null
+  court_id?: bigint | number | null
+  thoughts?: string | null
+  stars?: number | null
+}
+
+export type reviewUpdateWithoutUserInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  court?: Prisma.courtUpdateOneWithoutReviewNestedInput
+}
+
+export type reviewUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  court_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type reviewUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  court_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  thoughts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -587,6 +706,8 @@ export type reviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updated_at?: boolean
   court_id?: boolean
   user_id?: boolean
+  thoughts?: boolean
+  stars?: boolean
   court?: boolean | Prisma.review$courtArgs<ExtArgs>
   user?: boolean | Prisma.review$userArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
@@ -597,6 +718,8 @@ export type reviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updated_at?: boolean
   court_id?: boolean
   user_id?: boolean
+  thoughts?: boolean
+  stars?: boolean
   court?: boolean | Prisma.review$courtArgs<ExtArgs>
   user?: boolean | Prisma.review$userArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
@@ -607,6 +730,8 @@ export type reviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updated_at?: boolean
   court_id?: boolean
   user_id?: boolean
+  thoughts?: boolean
+  stars?: boolean
   court?: boolean | Prisma.review$courtArgs<ExtArgs>
   user?: boolean | Prisma.review$userArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
@@ -617,9 +742,11 @@ export type reviewSelectScalar = {
   updated_at?: boolean
   court_id?: boolean
   user_id?: boolean
+  thoughts?: boolean
+  stars?: boolean
 }
 
-export type reviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "updated_at" | "court_id" | "user_id", ExtArgs["result"]["review"]>
+export type reviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "updated_at" | "court_id" | "user_id" | "thoughts" | "stars", ExtArgs["result"]["review"]>
 export type reviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   court?: boolean | Prisma.review$courtArgs<ExtArgs>
   user?: boolean | Prisma.review$userArgs<ExtArgs>
@@ -645,6 +772,8 @@ export type $reviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     updated_at: Date | null
     court_id: bigint | null
     user_id: string | null
+    thoughts: string | null
+    stars: number | null
   }, ExtArgs["result"]["review"]>
   composites: {}
 }
@@ -1075,6 +1204,8 @@ export interface reviewFieldRefs {
   readonly updated_at: Prisma.FieldRef<"review", 'DateTime'>
   readonly court_id: Prisma.FieldRef<"review", 'BigInt'>
   readonly user_id: Prisma.FieldRef<"review", 'String'>
+  readonly thoughts: Prisma.FieldRef<"review", 'String'>
+  readonly stars: Prisma.FieldRef<"review", 'Int'>
 }
     
 

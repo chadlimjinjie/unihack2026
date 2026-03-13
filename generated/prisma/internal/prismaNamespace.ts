@@ -916,7 +916,8 @@ export const CourtScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   name: 'name',
-  location: 'location'
+  location: 'location',
+  image: 'image'
 } as const
 
 export type CourtScalarFieldEnum = (typeof CourtScalarFieldEnum)[keyof typeof CourtScalarFieldEnum]
@@ -927,7 +928,9 @@ export const ReviewScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   court_id: 'court_id',
-  user_id: 'user_id'
+  user_id: 'user_id',
+  thoughts: 'thoughts',
+  stars: 'stars'
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
@@ -1050,13 +1053,6 @@ export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1067,6 +1063,13 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

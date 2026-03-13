@@ -41,6 +41,7 @@ export type CourtMinAggregateOutputType = {
   updated_at: Date | null
   name: string | null
   location: string | null
+  image: string | null
 }
 
 export type CourtMaxAggregateOutputType = {
@@ -49,6 +50,7 @@ export type CourtMaxAggregateOutputType = {
   updated_at: Date | null
   name: string | null
   location: string | null
+  image: string | null
 }
 
 export type CourtCountAggregateOutputType = {
@@ -57,6 +59,7 @@ export type CourtCountAggregateOutputType = {
   updated_at: number
   name: number
   location: number
+  image: number
   _all: number
 }
 
@@ -75,6 +78,7 @@ export type CourtMinAggregateInputType = {
   updated_at?: true
   name?: true
   location?: true
+  image?: true
 }
 
 export type CourtMaxAggregateInputType = {
@@ -83,6 +87,7 @@ export type CourtMaxAggregateInputType = {
   updated_at?: true
   name?: true
   location?: true
+  image?: true
 }
 
 export type CourtCountAggregateInputType = {
@@ -91,6 +96,7 @@ export type CourtCountAggregateInputType = {
   updated_at?: true
   name?: true
   location?: true
+  image?: true
   _all?: true
 }
 
@@ -186,6 +192,7 @@ export type CourtGroupByOutputType = {
   updated_at: Date | null
   name: string | null
   location: string | null
+  image: string | null
   _count: CourtCountAggregateOutputType | null
   _avg: CourtAvgAggregateOutputType | null
   _sum: CourtSumAggregateOutputType | null
@@ -217,6 +224,7 @@ export type courtWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"court"> | Date | string | null
   name?: Prisma.StringNullableFilter<"court"> | string | null
   location?: Prisma.StringNullableFilter<"court"> | string | null
+  image?: Prisma.StringNullableFilter<"court"> | string | null
   review?: Prisma.ReviewListRelationFilter
 }
 
@@ -226,6 +234,7 @@ export type courtOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   review?: Prisma.reviewOrderByRelationAggregateInput
 }
 
@@ -238,6 +247,7 @@ export type courtWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeNullableFilter<"court"> | Date | string | null
   name?: Prisma.StringNullableFilter<"court"> | string | null
   location?: Prisma.StringNullableFilter<"court"> | string | null
+  image?: Prisma.StringNullableFilter<"court"> | string | null
   review?: Prisma.ReviewListRelationFilter
 }, "id">
 
@@ -247,6 +257,7 @@ export type courtOrderByWithAggregationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.courtCountOrderByAggregateInput
   _avg?: Prisma.courtAvgOrderByAggregateInput
   _max?: Prisma.courtMaxOrderByAggregateInput
@@ -263,6 +274,7 @@ export type courtScalarWhereWithAggregatesInput = {
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"court"> | Date | string | null
   name?: Prisma.StringNullableWithAggregatesFilter<"court"> | string | null
   location?: Prisma.StringNullableWithAggregatesFilter<"court"> | string | null
+  image?: Prisma.StringNullableWithAggregatesFilter<"court"> | string | null
 }
 
 export type courtCreateInput = {
@@ -271,6 +283,7 @@ export type courtCreateInput = {
   updated_at?: Date | string | null
   name?: string | null
   location?: string | null
+  image?: string | null
   review?: Prisma.reviewCreateNestedManyWithoutCourtInput
 }
 
@@ -280,6 +293,7 @@ export type courtUncheckedCreateInput = {
   updated_at?: Date | string | null
   name?: string | null
   location?: string | null
+  image?: string | null
   review?: Prisma.reviewUncheckedCreateNestedManyWithoutCourtInput
 }
 
@@ -289,6 +303,7 @@ export type courtUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   review?: Prisma.reviewUpdateManyWithoutCourtNestedInput
 }
 
@@ -298,6 +313,7 @@ export type courtUncheckedUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   review?: Prisma.reviewUncheckedUpdateManyWithoutCourtNestedInput
 }
 
@@ -307,6 +323,7 @@ export type courtCreateManyInput = {
   updated_at?: Date | string | null
   name?: string | null
   location?: string | null
+  image?: string | null
 }
 
 export type courtUpdateManyMutationInput = {
@@ -315,6 +332,7 @@ export type courtUpdateManyMutationInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type courtUncheckedUpdateManyInput = {
@@ -323,6 +341,7 @@ export type courtUncheckedUpdateManyInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type courtCountOrderByAggregateInput = {
@@ -331,6 +350,7 @@ export type courtCountOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type courtAvgOrderByAggregateInput = {
@@ -343,6 +363,7 @@ export type courtMaxOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type courtMinOrderByAggregateInput = {
@@ -351,6 +372,7 @@ export type courtMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
+  image?: Prisma.SortOrder
 }
 
 export type courtSumOrderByAggregateInput = {
@@ -392,6 +414,7 @@ export type courtCreateWithoutReviewInput = {
   updated_at?: Date | string | null
   name?: string | null
   location?: string | null
+  image?: string | null
 }
 
 export type courtUncheckedCreateWithoutReviewInput = {
@@ -400,6 +423,7 @@ export type courtUncheckedCreateWithoutReviewInput = {
   updated_at?: Date | string | null
   name?: string | null
   location?: string | null
+  image?: string | null
 }
 
 export type courtCreateOrConnectWithoutReviewInput = {
@@ -424,6 +448,7 @@ export type courtUpdateWithoutReviewInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type courtUncheckedUpdateWithoutReviewInput = {
@@ -432,6 +457,7 @@ export type courtUncheckedUpdateWithoutReviewInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -471,6 +497,7 @@ export type courtSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updated_at?: boolean
   name?: boolean
   location?: boolean
+  image?: boolean
   review?: boolean | Prisma.court$reviewArgs<ExtArgs>
   _count?: boolean | Prisma.CourtCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["court"]>
@@ -481,6 +508,7 @@ export type courtSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updated_at?: boolean
   name?: boolean
   location?: boolean
+  image?: boolean
 }, ExtArgs["result"]["court"]>
 
 export type courtSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -489,6 +517,7 @@ export type courtSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updated_at?: boolean
   name?: boolean
   location?: boolean
+  image?: boolean
 }, ExtArgs["result"]["court"]>
 
 export type courtSelectScalar = {
@@ -497,9 +526,10 @@ export type courtSelectScalar = {
   updated_at?: boolean
   name?: boolean
   location?: boolean
+  image?: boolean
 }
 
-export type courtOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "updated_at" | "name" | "location", ExtArgs["result"]["court"]>
+export type courtOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "updated_at" | "name" | "location" | "image", ExtArgs["result"]["court"]>
 export type courtInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   review?: boolean | Prisma.court$reviewArgs<ExtArgs>
   _count?: boolean | Prisma.CourtCountOutputTypeDefaultArgs<ExtArgs>
@@ -518,6 +548,7 @@ export type $courtPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     updated_at: Date | null
     name: string | null
     location: string | null
+    image: string | null
   }, ExtArgs["result"]["court"]>
   composites: {}
 }
@@ -947,6 +978,7 @@ export interface courtFieldRefs {
   readonly updated_at: Prisma.FieldRef<"court", 'DateTime'>
   readonly name: Prisma.FieldRef<"court", 'String'>
   readonly location: Prisma.FieldRef<"court", 'String'>
+  readonly image: Prisma.FieldRef<"court", 'String'>
 }
     
 
