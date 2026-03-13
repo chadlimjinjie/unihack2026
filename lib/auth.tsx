@@ -16,6 +16,10 @@ export const auth = betterAuth({
     //         clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     //     },
     // },
+    allowedOrigins: [
+        "*",
+        "http://localhost:3000"
+    ],
     database: new Pool({
         // connection options
         connectionString: process.env.DATABASE_URL,
