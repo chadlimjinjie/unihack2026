@@ -1,21 +1,39 @@
-# Next.js template
+UNIHACK 2026 - BAM B(ball)
+ 
+ 
+ Court Activity
 
-This is a Next.js template with shadcn/ui.
+    Bluetooth device scans nearby phones/wearables
 
-## Adding components
+    Sends estimated player count to Supabase
 
-To add components to your app, run the following command:
+    Next.js frontend displays:
 
-```bash
-npx shadcn@latest add button
-```
+        Court markers on a map
 
-This will place the ui components in the `components` directory.
+        Color‑coded activity levels
 
-## Using components
+        “Last updated” timestamps
 
-To use the components in your app, import them as follows:
+ Player Invites
 
-```tsx
-import { Button } from "@/components/ui/button";
+    Users can post invites to play at a specific court
+
+    Invites appear in a public feed
+
+    No authentication required for MVP
+
+ Map View
+
+    Hardcoded court locations
+
+    Live activity indicators
+
+    Click a court to view details + invites
+
+ Automatic Updates
+
+    Device → Supabase every 30 minutes
+
+    Frontend polls for fresh data every 30–60 seconds
 ```
