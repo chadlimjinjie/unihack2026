@@ -1,19 +1,74 @@
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { prisma } from "@/lib/prisma"
 
-export default function Page() {
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from "@/components/ui/tabs"
 
-    prisma.court.findMany().then(courts => {
-        console.log(courts)
-    }).catch(error => {
-        console.error("Error fetching courts:", error)
-    })
+export default async function Page() {
+
+    const courts = await prisma.court.findMany()
 
     return (
-        <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-            <div className="w-full max-w-sm">
-                <h1 className="text-2xl font-bold">Courts List</h1>
-                <p className="mt-4 text-gray-600">This page will display a list of courts.</p>
-            </div>
+        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+            <Tabs defaultValue="list" className="px-4 lg:px-6">
+                <TabsList>
+                    <TabsTrigger value="list">List</TabsTrigger>
+                    <TabsTrigger value="analytics">Map</TabsTrigger>
+                </TabsList>
+                <TabsContent value="list">
+                    <div className="grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 dark:*:data-[slot=card]:bg-card">
+                        {courts.map(court => {
+                            return (
+                                <Card className="relative mx-auto w-full max-w-sm pt-0">
+                                    <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+                                    <img
+                                        src="https://avatar.vercel.sh/shadcn1"
+                                        alt="Event cover"
+                                        className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+                                    />
+                                    <CardHeader>
+                                        <CardAction>
+                                            <Badge variant="secondary">Featured</Badge>
+                                        </CardAction>
+                                        <CardTitle>{court.name}</CardTitle>
+                                        <CardDescription>
+                                            {court.location}
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardFooter>
+                                        <Button className="w-full">View Event</Button>
+                                    </CardFooter>
+                                </Card>
+                            )
+                        })}
+                    </div>
+                </TabsContent>
+                <TabsContent value="analytics">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Map goes here</CardTitle>
+                            <CardDescription>
+                                Track performance and user engagement metrics. Monitor trends and
+                                identify growth opportunities.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="text-sm text-muted-foreground">
+                            Page views are up 25% compared to last month.
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+            </Tabs>
+
+
+
+
         </div>
+
     )
 }
