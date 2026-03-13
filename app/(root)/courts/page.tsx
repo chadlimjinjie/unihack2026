@@ -9,6 +9,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
+import Link from "next/link"
 
 export default async function Page() {
 
@@ -30,7 +31,7 @@ export default async function Page() {
                                         <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
                                         <img
                                             src="https://avatar.vercel.sh/shadcn1"
-                                            alt="Event cover"
+                                            alt="Court cover"
                                             className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
                                         />
                                         <CardHeader>
@@ -43,7 +44,11 @@ export default async function Page() {
                                             </CardDescription>
                                         </CardHeader>
                                         <CardFooter>
-                                            <Button className="w-full">View Event</Button>
+                                            <Button className="w-full" asChild>
+                                                <Link href={`/courts/${court.id}`}>
+                                                    View Court
+                                                </Link>
+                                            </Button>
                                         </CardFooter>
                                     </Card>
                                 )
