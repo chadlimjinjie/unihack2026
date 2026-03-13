@@ -20,7 +20,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { signOut, useSession } from "@/lib/auth-client"
 import { EllipsisVerticalIcon, CircleUserRoundIcon, CreditCardIcon, BellIcon, LogOutIcon } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export function NavUser({
   user,
@@ -32,6 +34,13 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
+  const {
+    data: session,
+    isPending, //loading state
+    error, //error object
+    refetch //refetch the session
+  } = useSession()
 
   return (
     <SidebarMenu>
@@ -47,9 +56,9 @@ export function NavUser({
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-start text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate font-medium">{session?.user.name}</span>
                 <span className="truncate text-xs text-muted-foreground">
-                  {user.email}
+                  {session?.user.email}
                 </span>
               </div>
               <EllipsisVerticalIcon className="ms-auto size-4" />
@@ -68,9 +77,9 @@ export function NavUser({
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-start text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate font-medium">{session?.user.name}</span>
                   <span className="truncate text-xs text-muted-foreground">
-                    {user.email}
+                    {session?.user.email}
                   </span>
                 </div>
               </div>
@@ -94,7 +103,17 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () => {
+                await signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      router.push("/login")
+                    },
+                  },
+                })
+              }}
+            >
               <LogOutIcon
               />
               Log out
