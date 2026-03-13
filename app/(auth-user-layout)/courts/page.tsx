@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { prisma } from "@/lib/prisma"
+import EmbeddedMap from "@/components/embedded-map"
 
 import {
     Tabs,
@@ -52,14 +53,16 @@ export default async function Page() {
                 <TabsContent value="analytics">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Map goes here</CardTitle>
+                            <CardTitle>Map</CardTitle>
                             <CardDescription>
-                                Track performance and user engagement metrics. Monitor trends and
-                                identify growth opportunities.
+                                Explore court locations on the map. Use controls to zoom and
+                                pan the view.
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="text-sm text-muted-foreground">
-                            Page views are up 25% compared to last month.
+                        <CardContent className="p-0">
+                            <div className="h-80 w-full">
+                                <EmbeddedMap />
+                            </div>
                         </CardContent>
                     </Card>
                 </TabsContent>
