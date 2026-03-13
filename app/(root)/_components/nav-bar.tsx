@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 // Simple logo component for the navbar
 const Logo = (props: React.SVGAttributes<SVGElement>) => {
@@ -84,6 +85,7 @@ export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
 // Default navigation links
 const defaultNavigationLinks: NavbarNavLink[] = [
     { href: "/", label: "Home", active: true },
+    { href: "/courts", label: "Courts" },
     { href: "/features", label: "Features" },
     //   { href: "/pricing", label: "Pricing" },
     { href: "/about", label: "About" },
@@ -170,20 +172,22 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                     <NavigationMenu className="max-w-none">
                                         <NavigationMenuList className="flex-col items-start gap-1">
                                             {navigationLinks.map((link, index) => (
-                                                <NavigationMenuItem className="w-full" key={index}>
-                                                    <button
-                                                        type="button"
-                                                        className={cn(
-                                                            "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer no-underline",
-                                                            link.active
-                                                                ? "bg-accent text-accent-foreground"
-                                                                : "text-foreground/80",
-                                                        )}
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        {link.label}
-                                                    </button>
-                                                </NavigationMenuItem>
+                                                <Link href={link.href} key={index}>
+                                                    <NavigationMenuItem className="w-full" key={index}>
+                                                        <button
+                                                            type="button"
+                                                            className={cn(
+                                                                "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer no-underline",
+                                                                link.active
+                                                                    ? "bg-accent text-accent-foreground"
+                                                                    : "text-foreground/80",
+                                                            )}
+                                                            // onClick={e => e.preventDefault()}
+                                                        >
+                                                            {link.label}
+                                                        </button>
+                                                    </NavigationMenuItem>
+                                                </Link>
                                             ))}
                                         </NavigationMenuList>
                                     </NavigationMenu>
@@ -205,20 +209,22 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 <NavigationMenu className="flex">
                                     <NavigationMenuList className="gap-1">
                                         {navigationLinks.map((link, index) => (
-                                            <NavigationMenuItem key={index}>
-                                                <button
-                                                    type="button"
-                                                    className={cn(
-                                                        "group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer no-underline",
-                                                        link.active
-                                                            ? "bg-accent text-accent-foreground"
-                                                            : "text-foreground/80 hover:text-foreground",
-                                                    )}
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    {link.label}
-                                                </button>
-                                            </NavigationMenuItem>
+                                            <Link href={link.href} key={index}>
+                                                <NavigationMenuItem key={index}>
+                                                    <button
+                                                        type="button"
+                                                        className={cn(
+                                                            "group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer no-underline",
+                                                            link.active
+                                                                ? "bg-accent text-accent-foreground"
+                                                                : "text-foreground/80 hover:text-foreground",
+                                                        )}
+                                                        // onClick={e => e.preventDefault()}
+                                                    >
+                                                        {link.label}
+                                                    </button>
+                                                </NavigationMenuItem>
+                                            </Link>
                                         ))}
                                     </NavigationMenuList>
                                 </NavigationMenu>
