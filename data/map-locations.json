@@ -1,0 +1,103 @@
+{
+  "locations": [
+    {
+      "id": "manual-1773398760479",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13459704103275,
+        -37.91044432633799
+      ]
+    },
+    {
+      "id": "manual-1773398764750",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13721074883784,
+        -37.91070564750615
+      ]
+    },
+    {
+      "id": "manual-1773398765577",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13714594594404,
+        -37.9110379754587
+      ]
+    },
+    {
+      "id": "manual-1773398767856",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13810467875106,
+        -37.91139388886871
+      ]
+    },
+    {
+      "id": "manual-1773398768806",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13891471491536,
+        -37.91148478128222
+      ]
+    },
+    {
+      "id": "manual-1773398770064",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.1385618991627,
+        -37.91230848866435
+      ]
+    },
+    {
+      "id": "manual-1773398771872",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.1377986650752,
+        -37.913430419787495
+      ]
+    },
+    {
+      "id": "manual-1773398775416",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13678699688126,
+        -37.91280255084945
+      ]
+    },
+    {
+      "id": "manual-1773398777955",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13729610612143,
+        -37.90961176164953
+      ]
+    },
+    {
+      "id": "manual-1773398779139",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13782809754042,
+        -37.90907017109591
+      ]
+    },
+    {
+      "id": "manual-1773398794668",
+      "type": "basketball",
+      "title": "Manual Basketball 1",
+      "coordinates": [
+        145.13550583529445,
+        -37.91058297056015
+      ]
+    }
+  ]
+}
