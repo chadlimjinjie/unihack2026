@@ -5,8 +5,13 @@ import { NextRequest } from "next/server"
 
 export async function POST(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
+
+     const { id } = await context.params
+    const courtId = Number(id)
+
+    
     // Check session server-side — non-logged in users cannot get through
     const session = await auth.api.getSession({
         headers: await headers(),
@@ -16,8 +21,7 @@ export async function POST(
         return Response.json({ error: "You must be logged in to leave a review." }, { status: 401 })
     }
 
-    const { id } = await params
-    const courtId = Number(id)
+    
     const { stars, thoughts } = await req.json()
 
     if (!stars || stars < 1 || stars > 5) {

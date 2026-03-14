@@ -44,5 +44,10 @@ export default async function Page({ params }: { params: { id: string } }) {
         people: Number(entry.player_ct),
     }))
 
-    return <CourtPage court={court} chartData={chartData} session={session} />
+    // Find if the logged-in user already has a review for this court
+    const existingReview = session
+        ? (court?.review ?? []).find((r) => r.user_id === session.user.id) ?? null
+        : null
+
+    return <CourtPage court={court} chartData={chartData} session={session} existingReview={existingReview} />
 }

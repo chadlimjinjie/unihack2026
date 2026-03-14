@@ -115,23 +115,26 @@ export default function CourtPage({
     court,
     chartData,
     session,
+    existingReview,
 }: {
     court: Court | null
     chartData: ChartEntry[]
     session: Session
+    existingReview: { stars: number | null; thoughts: string | null } | null
 }) {
     const reviews = court?.review ?? []
     const lastWeekDate = new Date()
 lastWeekDate.setUTCDate(lastWeekDate.getUTCDate() - 7)
 const dayLabel = lastWeekDate.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "short" })
-
     const avgRating = reviews.length > 0
         ? reviews.reduce((sum, r) => sum + (r.stars ?? 0), 0) / reviews.length
         : 0
 
+    const hasReviewed = !!existingReview
+
     const [dialogOpen, setDialogOpen] = useState(false)
-    const [stars, setStars] = useState(0)
-    const [thoughts, setThoughts] = useState("")
+    const [stars, setStars] = useState(existingReview?.stars ?? 0)
+    const [thoughts, setThoughts] = useState(existingReview?.thoughts ?? "")
     const [submitting, setSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [error, setError] = useState("")
@@ -215,39 +218,28 @@ const dayLabel = lastWeekDate.toLocaleDateString("en-AU", { weekday: "long", day
                     <CardTitle className="text-2xl">Court Usage Over Time</CardTitle>
                     <CardDescription>
                         {chartData.length > 0
-                            ? `Player count from last ${dayLabel}`
+                            ? `Player count throughout last ${dayLabel}`
                             : "No data available for last week's equivalent day"}
                     </CardDescription>
                 </CardHeader>
-                <CardContent className="h-[440px] pt-4 pr-4 pb-5 pl-2">
+                <CardContent className="h-[400px] p-2">
                     {chartData.length > 0 ? (
-                        <ChartContainer config={chartConfig} className="h-full w-full">
+                        <ChartContainer config={chartConfig}>
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={chartData} margin={{ top: 10, right: 20, bottom: 20, left: 20 }}>
-    <CartesianGrid vertical={false} strokeDasharray="3 3" />
-    <XAxis
-        dataKey="time"
-        tickLine={false}
-        axisLine={false}
-        tickMargin={8}
-        label={{ value: "Time of Day", position: "insideBottom", offset: -10, fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
-    />
-    <YAxis
-        tickLine={false}
-        axisLine={false}
-        tickMargin={8}
-        label={{ value: "Players", angle: -90, position: "insideLeft", offset: 10, fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
-    />
-    <ChartTooltip content={<ChartTooltipContent />} />
-    <Line
-        type="monotone"
-        dataKey="people"
-        stroke="var(--color-people)"
-        strokeWidth={3}
-        dot={{ fill: "var(--color-people)", strokeWidth: 2 }}
-        activeDot={{ r: 6, strokeWidth: 3 }}
-    />
-</LineChart>
+                                <LineChart accessibilityLayer data={chartData}>
+                                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                                    <XAxis dataKey="time" tickLine={false} axisLine={false} tickMargin={8} />
+                                    <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+                                    <ChartTooltip content={<ChartTooltipContent />} />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="people"
+                                        stroke="var(--color-people)"
+                                        strokeWidth={3}
+                                        dot={{ fill: "var(--color-people)", strokeWidth: 2 }}
+                                        activeDot={{ r: 6, strokeWidth: 3 }}
+                                    />
+                                </LineChart>
                             </ResponsiveContainer>
                         </ChartContainer>
                     ) : (
@@ -265,7 +257,7 @@ const dayLabel = lastWeekDate.toLocaleDateString("en-AU", { weekday: "long", day
                         <CardTitle className="text-2xl">Reviews & Rating</CardTitle>
                         {session ? (
                             <Button onClick={() => setDialogOpen(true)} className="gap-2">
-                                <PenLine className="w-4 h-4" /> Write a Review
+                                <PenLine className="w-4 h-4" /> {hasReviewed ? "Edit Your Review" : "Write a Review"}
                             </Button>
                         ) : (
                             <Button variant="outline" disabled className="gap-2">
@@ -313,9 +305,9 @@ const dayLabel = lastWeekDate.toLocaleDateString("en-AU", { weekday: "long", day
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                 <DialogContent className="sm:max-w-md">
                     <DialogHeader>
-                        <DialogTitle>Rate {court?.name ?? "this court"}</DialogTitle>
+                        <DialogTitle>{hasReviewed ? "Edit Your Review" : `Rate ${court?.name ?? "this court"}`}</DialogTitle>
                         <DialogDescription>
-                            Share your experience to help other ballers.
+                            {hasReviewed ? "Update your rating or thoughts." : "Share your experience to help other ballers."}
                         </DialogDescription>
                     </DialogHeader>
 
@@ -333,7 +325,7 @@ const dayLabel = lastWeekDate.toLocaleDateString("en-AU", { weekday: "long", day
                     ) : submitted ? (
                         <div className="py-10 flex flex-col items-center gap-3 text-center">
                             <p className="text-4xl">🏀</p>
-                            <p className="font-semibold text-base">Review submitted!</p>
+                            <p className="font-semibold text-base">{hasReviewed ? "Review updated!" : "Review submitted!"}</p>
                             <p className="text-sm text-muted-foreground">Thanks for rating the court.</p>
                         </div>
 
@@ -375,3 +367,6 @@ const dayLabel = lastWeekDate.toLocaleDateString("en-AU", { weekday: "long", day
         </div>
     )
 }
+
+
+
