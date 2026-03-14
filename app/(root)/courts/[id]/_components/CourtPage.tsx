@@ -121,6 +121,9 @@ export default function CourtPage({
     session: Session
 }) {
     const reviews = court?.review ?? []
+    const lastWeekDate = new Date()
+lastWeekDate.setUTCDate(lastWeekDate.getUTCDate() - 7)
+const dayLabel = lastWeekDate.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "short" })
 
     const avgRating = reviews.length > 0
         ? reviews.reduce((sum, r) => sum + (r.stars ?? 0), 0) / reviews.length
@@ -131,27 +134,33 @@ export default function CourtPage({
     const [thoughts, setThoughts] = useState("")
     const [submitting, setSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
-
-    const lastWeekDay = new Date()
-    lastWeekDay.setDate(lastWeekDay.getDate() - 7)
-    const dayLabel = lastWeekDay.toLocaleDateString("en-AU", { weekday: "long", month: "short", day: "numeric" })
+    const [error, setError] = useState("")
 
     async function handleSubmitReview() {
         if (!session || !stars) return
         setSubmitting(true)
+        setError("")
         try {
-            await fetch(`/api/courts/${court?.id}/review`, {
+            const res = await fetch(`/api/courts/${court?.id}/review`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ stars, thoughts }),
             })
+            const data = await res.json()
+            if (!res.ok) {
+                setError(data.error ?? "Something went wrong.")
+                return
+            }
             setSubmitted(true)
             setTimeout(() => {
                 setDialogOpen(false)
                 setSubmitted(false)
                 setStars(0)
                 setThoughts("")
+                setError("")
             }, 1500)
+        } catch {
+            setError("Network error. Please try again.")
         } finally {
             setSubmitting(false)
         }
@@ -206,28 +215,39 @@ export default function CourtPage({
                     <CardTitle className="text-2xl">Court Usage Over Time</CardTitle>
                     <CardDescription>
                         {chartData.length > 0
-                            ? `Player count throughout last ${dayLabel}`
+                            ? `Player count from last ${dayLabel}`
                             : "No data available for last week's equivalent day"}
                     </CardDescription>
                 </CardHeader>
-                <CardContent className="h-[400px] p-2">
+                <CardContent className="h-[440px] pt-4 pr-4 pb-5 pl-2">
                     {chartData.length > 0 ? (
-                        <ChartContainer config={chartConfig}>
+                        <ChartContainer config={chartConfig} className="h-full w-full">
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart accessibilityLayer data={chartData}>
-                                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                                    <XAxis dataKey="time" tickLine={false} axisLine={false} tickMargin={8} />
-                                    <YAxis tickLine={false} axisLine={false} tickMargin={8} />
-                                    <ChartTooltip content={<ChartTooltipContent />} />
-                                    <Line
-                                        type="monotone"
-                                        dataKey="people"
-                                        stroke="var(--color-people)"
-                                        strokeWidth={3}
-                                        dot={{ fill: "var(--color-people)", strokeWidth: 2 }}
-                                        activeDot={{ r: 6, strokeWidth: 3 }}
-                                    />
-                                </LineChart>
+                                <LineChart data={chartData} margin={{ top: 10, right: 20, bottom: 20, left: 20 }}>
+    <CartesianGrid vertical={false} strokeDasharray="3 3" />
+    <XAxis
+        dataKey="time"
+        tickLine={false}
+        axisLine={false}
+        tickMargin={8}
+        label={{ value: "Time of Day", position: "insideBottom", offset: -10, fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+    />
+    <YAxis
+        tickLine={false}
+        axisLine={false}
+        tickMargin={8}
+        label={{ value: "Players", angle: -90, position: "insideLeft", offset: 10, fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+    />
+    <ChartTooltip content={<ChartTooltipContent />} />
+    <Line
+        type="monotone"
+        dataKey="people"
+        stroke="var(--color-people)"
+        strokeWidth={3}
+        dot={{ fill: "var(--color-people)", strokeWidth: 2 }}
+        activeDot={{ r: 6, strokeWidth: 3 }}
+    />
+</LineChart>
                             </ResponsiveContainer>
                         </ChartContainer>
                     ) : (
@@ -299,12 +319,24 @@ export default function CourtPage({
                         </DialogDescription>
                     </DialogHeader>
 
-                    {submitted ? (
+                    {/* Not logged in */}
+                    {!session ? (
+                        <div className="py-8 flex flex-col items-center gap-4 text-center">
+                            <p className="text-4xl">🔒</p>
+                            <p className="font-semibold text-base">Sign in to leave a review</p>
+                            <p className="text-sm text-muted-foreground">You need to be logged in to rate this court.</p>
+                            <DialogFooter className="w-full">
+                                <Button className="w-full" onClick={() => setDialogOpen(false)}>Close</Button>
+                            </DialogFooter>
+                        </div>
+
+                    ) : submitted ? (
                         <div className="py-10 flex flex-col items-center gap-3 text-center">
                             <p className="text-4xl">🏀</p>
                             <p className="font-semibold text-base">Review submitted!</p>
                             <p className="text-sm text-muted-foreground">Thanks for rating the court.</p>
                         </div>
+
                     ) : (
                         <>
                             <div className="space-y-5 py-2">
@@ -313,15 +345,18 @@ export default function CourtPage({
                                     <StarPicker value={stars} onChange={setStars} />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="thoughts">Your thoughts</Label>
+                                    <Label htmlFor="thoughts">Your thoughts <span className="text-muted-foreground">(optional)</span></Label>
                                     <Textarea
                                         id="thoughts"
                                         placeholder="How's the surface? The hoops? The vibe?"
                                         rows={4}
                                         value={thoughts}
-                                        onChange={(e) => setThoughts(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setThoughts(e.target.value)}
                                     />
                                 </div>
+                                {error && (
+                                    <p className="text-sm text-red-500">{error}</p>
+                                )}
                             </div>
                             <DialogFooter>
                                 <Button variant="ghost" onClick={() => setDialogOpen(false)}>Cancel</Button>
