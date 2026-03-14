@@ -6,6 +6,12 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
 
+function escapeHtml(text: string): string {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 export default function EmbeddedMap(): JSX.Element {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
@@ -22,7 +28,7 @@ export default function EmbeddedMap(): JSX.Element {
     if (mapContainer.current && !mapRef.current) {
       mapRef.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v11",
+        style: "mapbox://styles/mapbox/streets-v12",
         center: [145.1330, -37.9105],
         zoom: 16,
       });
@@ -43,20 +49,23 @@ export default function EmbeddedMap(): JSX.Element {
           console.warn('Failed to fetch saved locations', err);
         }
 
+        const map = mapRef.current;
+
         locations.forEach((loc: any) => {
           const coords = loc.coordinates ?? loc.lnglat ?? loc.location;
           if (!coords || (loc.type !== 'basketball' && loc.type !== 'key')) return;
 
           const el = document.createElement('div');
-                    if (loc.type === 'basketball') {
-                      el.innerHTML = `<img src="/icons/basketball-15.svg" alt="Basketball court" style="width:28px;height:28px;display:inline-block;transform:translate(-50%,-50%);"/>`;
-                      el.style.width = '28px';
-                      el.style.height = '28px';
-                      el.style.display = 'inline-block';
-                      el.style.transform = 'translate(-50%, -50%)';
-                      el.setAttribute('aria-label', loc.title ?? 'Basketball court');
-                      el.setAttribute('role', 'img');
-                    } else {
+          el.className = 'map-marker-basketball';
+          if (loc.type === 'basketball') {
+            el.innerHTML = `<img src="/icons/basketball-15.svg" alt="Basketball court" style="width:28px;height:28px;display:block;transform:translate(-50%,-50%);pointer-events:none;"/>`;
+            el.style.width = '28px';
+            el.style.height = '28px';
+            el.style.cursor = 'pointer';
+            el.style.transform = 'translate(-50%, -50%)';
+            el.setAttribute('aria-label', loc.title ?? 'Basketball court');
+            el.setAttribute('role', 'button');
+          } else {
             el.style.width = '14px';
             el.style.height = '14px';
             el.style.background = 'rgba(30, 144, 255, 0.85)';
@@ -64,22 +73,43 @@ export default function EmbeddedMap(): JSX.Element {
             el.style.borderRadius = '50%';
             el.style.boxShadow = '0 1px 4px rgba(0,0,0,0.35)';
             el.style.transform = 'translate(-50%, -50%)';
+            el.style.cursor = 'pointer';
             el.setAttribute('aria-label', loc.title ?? 'Key location');
             el.setAttribute('role', 'img');
           }
 
-                    const popupHtml = `
-                      <div style="min-width:160px">
-                        <strong>${loc.title ?? ''}</strong>
-                        ${loc.subtitle ? `<div style="font-size:12px;color:var(--muted-foreground)">${loc.subtitle}</div>` : ''}
-                        ${loc.courtId ? `<div style="margin-top:6px"><a href="/courts/${loc.courtId}" style="color:#0070f3">View court</a></div>` : ''}
-                      </div>
-                    `;
+          const imageUrl = loc.image ?? '';
+          const rating = loc.rating != null ? Number(loc.rating) : null;
+          const reviewCount = Number(loc.reviewCount) || 0;
+          const starLabel =
+            rating != null
+              ? reviewCount > 0
+                ? `★ ${rating.toFixed(1)} (${reviewCount} ${reviewCount === 1 ? 'review' : 'reviews'})`
+                : `★ ${rating.toFixed(1)}`
+              : '';
+          const ratingHtml = starLabel
+            ? `<div style="font-size:13px;margin-bottom:6px;color:#0f172a;">${escapeHtml(starLabel)}</div>`
+            : '';
+          const popupHtml = `
+            <div class="mapbox-popup-blurb" style="min-width:200px;max-width:260px;">
+              <strong style="display:block;font-size:14px;margin-bottom:4px;">${escapeHtml(loc.title ?? '')}</strong>
+              ${ratingHtml}
+              ${loc.subtitle ? `<div style="font-size:12px;color:#64748b;margin-bottom:8px;">${escapeHtml(loc.subtitle)}</div>` : ''}
+              ${imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="" style="width:100%;height:100px;object-fit:cover;border-radius:6px;margin-bottom:8px;display:block;" />` : ''}
+              ${loc.courtId ? `<a href="/courts/${escapeHtml(loc.courtId)}" class="mapbox-popup-view-btn" style="display:inline-block;margin-top:6px;padding:6px 12px;background:var(--primary);color:var(--primary-foreground);border-radius:6px;font-size:13px;font-weight:500;text-decoration:none;border:none;cursor:pointer;">View court</a>` : ''}
+            </div>
+          `;
 
-                    const marker = new mapboxgl.Marker({ element: el })
-                        .setLngLat(coords as [number, number])
-                        .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml))
-                        .addTo(mapRef.current as mapboxgl.Map);
+          const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml);
+
+          const marker = new mapboxgl.Marker({ element: el })
+            .setLngLat(coords as [number, number])
+            .setPopup(popup)
+            .addTo(map);
+
+          el.addEventListener('click', () => {
+            map.flyTo({ center: coords as [number, number], zoom: 17, duration: 800 });
+          });
 
           markersRef.current.push(marker);
         });

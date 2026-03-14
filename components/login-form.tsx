@@ -18,13 +18,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
 import { useForm } from "@tanstack/react-form"
-import { redirect } from "next/navigation"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter()
 
   const form = useForm({
     defaultValues: {
@@ -45,9 +46,9 @@ export function LoginForm({
         onRequest: (ctx) => {
           // show loading
         },
-        onSuccess: (ctx) => {
-          // redirect to the dashboard or sign in page
-          redirect("/")
+        onSuccess: () => {
+          router.push("/")
+          router.refresh()
         }
       })
     }
@@ -55,7 +56,7 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="border border-border shadow-md">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
@@ -135,7 +136,7 @@ export function LoginForm({
                     Login with Google
                   </Button> */}
                   <FieldDescription className="text-center">
-                    Don&apos;t have an account? <Link href="/signup">Sign up</Link>
+                    Don&apos;t have an account? <Link href="/signup" className="text-primary hover:text-primary/90 transition-colors duration-200 font-medium">Sign up</Link>
                   </FieldDescription>
                 </Field>
               </FieldGroup>

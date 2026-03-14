@@ -13,8 +13,14 @@ export function useMQTTSubscribe(client: MqttClient | null, topic: string, onMes
         client.subscribe(topic);
         client.on('message', handleMsg);
         return () => {
-            client.unsubscribe(topic);
-            client.off('message', handleMsg);
+            try {
+                if (client.connected) {
+                    client.unsubscribe(topic);
+                }
+                client.off('message', handleMsg);
+            } catch {
+                // Client may already be disconnecting; ignore cleanup errors
+            }
         };
     }, [client, topic, onMessage]);
 }

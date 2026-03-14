@@ -15,13 +15,15 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 import { authClient } from "@/lib/auth-client"
 import { useForm } from "@tanstack/react-form"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { z } from "zod"
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter()
 
   const formSchema = z.object({
     name: z
@@ -54,14 +56,14 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         password: value.password, // user password -> min 8 characters by default
         name: value.name, // user display name
         // image: value.image, // User image URL (optional)
-        callbackURL: "/dashboard" // A URL to redirect to after the user verifies their email (optional)
+        callbackURL: "/"
       }, {
         onRequest: (ctx) => {
           // show loading
         },
-        onSuccess: (ctx) => {
-          // redirect to the dashboard or sign in page
-          redirect("/dashboard");
+        onSuccess: () => {
+          router.push("/")
+          router.refresh()
         },
         onError: (ctx) => {
           // display the error message
@@ -88,7 +90,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   })
 
   return (
-    <Card {...props}>
+    <Card {...props} className={cn("border border-border shadow-md", props.className)}>
       <CardHeader>
         <CardTitle>Create an account</CardTitle>
         <CardDescription>
@@ -209,7 +211,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                   Sign up with Google
                 </Button> */}
                 <FieldDescription className="px-6 text-center">
-                  Already have an account? <Link href="/login">Sign in</Link>
+                  Already have an account? <Link href="/login" className="text-primary hover:text-primary/90 transition-colors duration-200 font-medium">Sign in</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

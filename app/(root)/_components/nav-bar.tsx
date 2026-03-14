@@ -8,11 +8,18 @@ import {
     NavigationMenuItem,
     NavigationMenuList,
 } from "@/components/ui/navigation-menu"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { signOut, useSession } from "@/lib/auth-client"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { User } from "lucide-react"
 
 // Simple logo component for the navbar
 const Logo = (props: React.SVGAttributes<SVGElement>) => {
@@ -72,7 +79,15 @@ export interface NavbarNavLink {
     active?: boolean
 }
 
+export interface ServerSessionUser {
+    id: string
+    name?: string | null
+    email?: string | null
+    image?: string | null
+}
+
 export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
+    serverSession?: { user: ServerSessionUser } | null
     logo?: React.ReactNode
     logoHref?: string
     navigationLinks?: NavbarNavLink[]
@@ -84,14 +99,11 @@ export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
     onCtaClick?: () => void
 }
 
-// Default navigation links
+// Default navigation links (active state derived from pathname in component)
 const defaultNavigationLinks: NavbarNavLink[] = [
-    { href: "/", label: "Home", active: true },
+    { href: "/", label: "Home" },
     { href: "/courts", label: "Courts" },
-        { href: "/sessions", label: "Sessions" },
-
-    // { href: "/features", label: "Features" },
-    //   { href: "/pricing", label: "Pricing" },
+    { href: "/sessions", label: "Sessions" },
     { href: "/about", label: "About" },
 ]
 
@@ -99,6 +111,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
     (
         {
             className,
+            serverSession = null,
             logo = <Logo />,
             logoHref = "/",
             navigationLinks = defaultNavigationLinks,
@@ -113,10 +126,16 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
         ref,
     ) => {
         const [isMobile, setIsMobile] = useState(false)
+        const [logoError, setLogoError] = useState(false)
         const containerRef = useRef<HTMLElement>(null)
 
         const session = useSession()
         const router = useRouter()
+        const pathname = usePathname()
+        const isSignedIn = !!(serverSession ?? session?.data)
+
+        const isLinkActive = (href: string) =>
+            href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/")
 
         useEffect(() => {
             const checkWidth = () => {
@@ -184,12 +203,11 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                                         <button
                                                             type="button"
                                                             className={cn(
-                                                                "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer no-underline",
-                                                                link.active
+                                                                "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 hover:bg-accent hover:text-accent-foreground cursor-pointer no-underline",
+                                                                isLinkActive(link.href)
                                                                     ? "bg-accent text-accent-foreground"
                                                                     : "text-foreground/80",
                                                             )}
-                                                        // onClick={e => e.preventDefault()}
                                                         >
                                                             {link.label}
                                                         </button>
@@ -211,10 +229,19 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 <div className="text-2xl">{logo}</div>
                                 <span className="hidden font-bold text-xl sm:inline-block">BAM B(ball)</span>
                             </button> */}
-                            <Button asChild variant="ghost">
-                                <Link href="/">
-                                    <div className="text-2xl">{logo}</div>
-                                    <span className="text-xl font-semibold">BAM B(ball)</span>
+                            <Button asChild variant="ghost" className="transition-colors duration-200">
+                                <Link href="/" className="flex items-center gap-2">
+                                    {!logoError ? (
+                                        <img
+                                            src="/logo.png"
+                                            alt="BamBi"
+                                            className="h-8 w-8 object-contain"
+                                            onError={() => setLogoError(true)}
+                                        />
+                                    ) : (
+                                        <div className="text-2xl">{logo}</div>
+                                    )}
+                                    <span className="text-xl font-semibold">Bambii</span>
                                 </Link>
                             </Button>
                             {/* Navigation menu */}
@@ -227,12 +254,11 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                                     <button
                                                         type="button"
                                                         className={cn(
-                                                            "group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer no-underline",
-                                                            link.active
+                                                            "group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer no-underline",
+                                                            isLinkActive(link.href)
                                                                 ? "bg-accent text-accent-foreground"
                                                                 : "text-foreground/80 hover:text-foreground",
                                                         )}
-                                                    // onClick={e => e.preventDefault()}
                                                     >
                                                         {link.label}
                                                     </button>
@@ -247,23 +273,42 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                     {/* Right side */}
                     <div className="flex items-center gap-3">
                         {session.data && (
-                            <Button
-                                variant="ghost"
-                                asChild
-                                onClick={async () => {
-                                    await signOut({
-                                        fetchOptions: {
-                                            onSuccess: () => {
-                                                router.push("/login"); // redirect to login page
-                                            },
-                                        },
-                                    });
-                                }}
-                            >
-                                <span>Sign Out</span>
-                            </Button>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="rounded-full h-9 w-9 transition-colors duration-200"
+                                        aria-label="Profile menu"
+                                    >
+                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground ring-1 ring-border">
+                                            <User className="h-4 w-4" />
+                                        </span>
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" className="min-w-[160px]">
+                                    <DropdownMenuItem disabled className="text-muted-foreground">
+                                        <User className="mr-2 h-4 w-4" />
+                                        Profile
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        variant="destructive"
+                                        onClick={async () => {
+                                            await signOut({
+                                                fetchOptions: {
+                                                    onSuccess: () => {
+                                                        router.push("/login");
+                                                    },
+                                                },
+                                            });
+                                        }}
+                                    >
+                                        Log out
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         )}
-                        {!session.data && (
+                        {!isSignedIn && (
                             <Button
                                 variant="ghost"
                                 asChild
@@ -273,7 +318,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 </Link>
                             </Button>
                         )}
-                        {!session.data && (
+                        {!isSignedIn && (
                             <Button asChild>
                                 <Link href={ctaHref}>
                                     {ctaText}

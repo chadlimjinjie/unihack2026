@@ -15,7 +15,7 @@ export default function CourtCard({
     location: string | null
 }) {
     return (
-        <Card className="relative w-full max-w-sm pt-0">
+        <Card className="relative w-full max-w-sm pt-0 border border-border shadow-md transition-shadow duration-200 hover:shadow-lg">
             {/* <div className="absolute inset-0 z-30 aspect-video bg-black/35" /> */}
             <img
                 src={image ?? "https://avatar.vercel.sh/shadcn1"}
