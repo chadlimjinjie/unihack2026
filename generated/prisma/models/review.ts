@@ -475,14 +475,6 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableBigIntFieldUpdateOperationsInput = {
-  set?: bigint | number | null
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
-}
-
 export type reviewCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.reviewCreateWithoutUserInput, Prisma.reviewUncheckedCreateWithoutUserInput> | Prisma.reviewCreateWithoutUserInput[] | Prisma.reviewUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.reviewCreateOrConnectWithoutUserInput | Prisma.reviewCreateOrConnectWithoutUserInput[]

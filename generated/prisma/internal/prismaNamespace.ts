@@ -389,7 +389,8 @@ export const ModelName = {
   review: 'review',
   session: 'session',
   user: 'user',
-  verification: 'verification'
+  verification: 'verification',
+  occupancy_log: 'occupancy_log'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "court" | "review" | "session" | "user" | "verification"
+    modelProps: "account" | "court" | "review" | "session" | "user" | "verification" | "occupancy_log"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +854,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    occupancy_log: {
+      payload: Prisma.$occupancy_logPayload<ExtArgs>
+      fields: Prisma.occupancy_logFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.occupancy_logFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.occupancy_logFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>
+        }
+        findFirst: {
+          args: Prisma.occupancy_logFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.occupancy_logFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>
+        }
+        findMany: {
+          args: Prisma.occupancy_logFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>[]
+        }
+        create: {
+          args: Prisma.occupancy_logCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>
+        }
+        createMany: {
+          args: Prisma.occupancy_logCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.occupancy_logCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>[]
+        }
+        delete: {
+          args: Prisma.occupancy_logDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>
+        }
+        update: {
+          args: Prisma.occupancy_logUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>
+        }
+        deleteMany: {
+          args: Prisma.occupancy_logDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.occupancy_logUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.occupancy_logUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>[]
+        }
+        upsert: {
+          args: Prisma.occupancy_logUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$occupancy_logPayload>
+        }
+        aggregate: {
+          args: Prisma.Occupancy_logAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOccupancy_log>
+        }
+        groupBy: {
+          args: Prisma.occupancy_logGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Occupancy_logGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.occupancy_logCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Occupancy_logCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -917,7 +992,8 @@ export const CourtScalarFieldEnum = {
   updated_at: 'updated_at',
   name: 'name',
   location: 'location',
-  image: 'image'
+  image: 'image',
+  player_live: 'player_live'
 } as const
 
 export type CourtScalarFieldEnum = (typeof CourtScalarFieldEnum)[keyof typeof CourtScalarFieldEnum]
@@ -978,6 +1054,16 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const Occupancy_logScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  court_id: 'court_id',
+  player_ct: 'player_ct'
+} as const
+
+export type Occupancy_logScalarFieldEnum = (typeof Occupancy_logScalarFieldEnum)[keyof typeof Occupancy_logScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1187,6 +1273,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.sessionOmit
   user?: Prisma.userOmit
   verification?: Prisma.verificationOmit
+  occupancy_log?: Prisma.occupancy_logOmit
 }
 
 /* Types for Logging */
