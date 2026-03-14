@@ -239,6 +239,7 @@ export type courtWhereInput = {
   player_live?: Prisma.BigIntNullableFilter<"court"> | bigint | number | null
   occupancy_log?: Prisma.Occupancy_logListRelationFilter
   review?: Prisma.ReviewListRelationFilter
+  session_invite?: Prisma.Session_inviteListRelationFilter
 }
 
 export type courtOrderByWithRelationInput = {
@@ -251,6 +252,7 @@ export type courtOrderByWithRelationInput = {
   player_live?: Prisma.SortOrderInput | Prisma.SortOrder
   occupancy_log?: Prisma.occupancy_logOrderByRelationAggregateInput
   review?: Prisma.reviewOrderByRelationAggregateInput
+  session_invite?: Prisma.session_inviteOrderByRelationAggregateInput
 }
 
 export type courtWhereUniqueInput = Prisma.AtLeast<{
@@ -266,6 +268,7 @@ export type courtWhereUniqueInput = Prisma.AtLeast<{
   player_live?: Prisma.BigIntNullableFilter<"court"> | bigint | number | null
   occupancy_log?: Prisma.Occupancy_logListRelationFilter
   review?: Prisma.ReviewListRelationFilter
+  session_invite?: Prisma.Session_inviteListRelationFilter
 }, "id">
 
 export type courtOrderByWithAggregationInput = {
@@ -306,6 +309,7 @@ export type courtCreateInput = {
   player_live?: bigint | number | null
   occupancy_log?: Prisma.occupancy_logCreateNestedManyWithoutCourtInput
   review?: Prisma.reviewCreateNestedManyWithoutCourtInput
+  session_invite?: Prisma.session_inviteCreateNestedManyWithoutCourtInput
 }
 
 export type courtUncheckedCreateInput = {
@@ -318,6 +322,7 @@ export type courtUncheckedCreateInput = {
   player_live?: bigint | number | null
   occupancy_log?: Prisma.occupancy_logUncheckedCreateNestedManyWithoutCourtInput
   review?: Prisma.reviewUncheckedCreateNestedManyWithoutCourtInput
+  session_invite?: Prisma.session_inviteUncheckedCreateNestedManyWithoutCourtInput
 }
 
 export type courtUpdateInput = {
@@ -330,6 +335,7 @@ export type courtUpdateInput = {
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   occupancy_log?: Prisma.occupancy_logUpdateManyWithoutCourtNestedInput
   review?: Prisma.reviewUpdateManyWithoutCourtNestedInput
+  session_invite?: Prisma.session_inviteUpdateManyWithoutCourtNestedInput
 }
 
 export type courtUncheckedUpdateInput = {
@@ -342,6 +348,7 @@ export type courtUncheckedUpdateInput = {
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   occupancy_log?: Prisma.occupancy_logUncheckedUpdateManyWithoutCourtNestedInput
   review?: Prisma.reviewUncheckedUpdateManyWithoutCourtNestedInput
+  session_invite?: Prisma.session_inviteUncheckedUpdateManyWithoutCourtNestedInput
 }
 
 export type courtCreateManyInput = {
@@ -419,6 +426,11 @@ export type CourtNullableScalarRelationFilter = {
   isNot?: Prisma.courtWhereInput | null
 }
 
+export type CourtScalarRelationFilter = {
+  is?: Prisma.courtWhereInput
+  isNot?: Prisma.courtWhereInput
+}
+
 export type BigIntFieldUpdateOperationsInput = {
   set?: bigint | number
   increment?: bigint | number
@@ -467,6 +479,20 @@ export type courtUpdateOneWithoutOccupancy_logNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.courtUpdateToOneWithWhereWithoutOccupancy_logInput, Prisma.courtUpdateWithoutOccupancy_logInput>, Prisma.courtUncheckedUpdateWithoutOccupancy_logInput>
 }
 
+export type courtCreateNestedOneWithoutSession_inviteInput = {
+  create?: Prisma.XOR<Prisma.courtCreateWithoutSession_inviteInput, Prisma.courtUncheckedCreateWithoutSession_inviteInput>
+  connectOrCreate?: Prisma.courtCreateOrConnectWithoutSession_inviteInput
+  connect?: Prisma.courtWhereUniqueInput
+}
+
+export type courtUpdateOneRequiredWithoutSession_inviteNestedInput = {
+  create?: Prisma.XOR<Prisma.courtCreateWithoutSession_inviteInput, Prisma.courtUncheckedCreateWithoutSession_inviteInput>
+  connectOrCreate?: Prisma.courtCreateOrConnectWithoutSession_inviteInput
+  upsert?: Prisma.courtUpsertWithoutSession_inviteInput
+  connect?: Prisma.courtWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.courtUpdateToOneWithWhereWithoutSession_inviteInput, Prisma.courtUpdateWithoutSession_inviteInput>, Prisma.courtUncheckedUpdateWithoutSession_inviteInput>
+}
+
 export type courtCreateWithoutReviewInput = {
   id?: bigint | number
   created_at?: Date | string
@@ -476,6 +502,7 @@ export type courtCreateWithoutReviewInput = {
   image?: string | null
   player_live?: bigint | number | null
   occupancy_log?: Prisma.occupancy_logCreateNestedManyWithoutCourtInput
+  session_invite?: Prisma.session_inviteCreateNestedManyWithoutCourtInput
 }
 
 export type courtUncheckedCreateWithoutReviewInput = {
@@ -487,6 +514,7 @@ export type courtUncheckedCreateWithoutReviewInput = {
   image?: string | null
   player_live?: bigint | number | null
   occupancy_log?: Prisma.occupancy_logUncheckedCreateNestedManyWithoutCourtInput
+  session_invite?: Prisma.session_inviteUncheckedCreateNestedManyWithoutCourtInput
 }
 
 export type courtCreateOrConnectWithoutReviewInput = {
@@ -514,6 +542,7 @@ export type courtUpdateWithoutReviewInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   occupancy_log?: Prisma.occupancy_logUpdateManyWithoutCourtNestedInput
+  session_invite?: Prisma.session_inviteUpdateManyWithoutCourtNestedInput
 }
 
 export type courtUncheckedUpdateWithoutReviewInput = {
@@ -525,6 +554,7 @@ export type courtUncheckedUpdateWithoutReviewInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   occupancy_log?: Prisma.occupancy_logUncheckedUpdateManyWithoutCourtNestedInput
+  session_invite?: Prisma.session_inviteUncheckedUpdateManyWithoutCourtNestedInput
 }
 
 export type courtCreateWithoutOccupancy_logInput = {
@@ -536,6 +566,7 @@ export type courtCreateWithoutOccupancy_logInput = {
   image?: string | null
   player_live?: bigint | number | null
   review?: Prisma.reviewCreateNestedManyWithoutCourtInput
+  session_invite?: Prisma.session_inviteCreateNestedManyWithoutCourtInput
 }
 
 export type courtUncheckedCreateWithoutOccupancy_logInput = {
@@ -547,6 +578,7 @@ export type courtUncheckedCreateWithoutOccupancy_logInput = {
   image?: string | null
   player_live?: bigint | number | null
   review?: Prisma.reviewUncheckedCreateNestedManyWithoutCourtInput
+  session_invite?: Prisma.session_inviteUncheckedCreateNestedManyWithoutCourtInput
 }
 
 export type courtCreateOrConnectWithoutOccupancy_logInput = {
@@ -574,6 +606,7 @@ export type courtUpdateWithoutOccupancy_logInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   review?: Prisma.reviewUpdateManyWithoutCourtNestedInput
+  session_invite?: Prisma.session_inviteUpdateManyWithoutCourtNestedInput
 }
 
 export type courtUncheckedUpdateWithoutOccupancy_logInput = {
@@ -585,6 +618,71 @@ export type courtUncheckedUpdateWithoutOccupancy_logInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   review?: Prisma.reviewUncheckedUpdateManyWithoutCourtNestedInput
+  session_invite?: Prisma.session_inviteUncheckedUpdateManyWithoutCourtNestedInput
+}
+
+export type courtCreateWithoutSession_inviteInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  updated_at?: Date | string | null
+  name?: string | null
+  location?: string | null
+  image?: string | null
+  player_live?: bigint | number | null
+  occupancy_log?: Prisma.occupancy_logCreateNestedManyWithoutCourtInput
+  review?: Prisma.reviewCreateNestedManyWithoutCourtInput
+}
+
+export type courtUncheckedCreateWithoutSession_inviteInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  updated_at?: Date | string | null
+  name?: string | null
+  location?: string | null
+  image?: string | null
+  player_live?: bigint | number | null
+  occupancy_log?: Prisma.occupancy_logUncheckedCreateNestedManyWithoutCourtInput
+  review?: Prisma.reviewUncheckedCreateNestedManyWithoutCourtInput
+}
+
+export type courtCreateOrConnectWithoutSession_inviteInput = {
+  where: Prisma.courtWhereUniqueInput
+  create: Prisma.XOR<Prisma.courtCreateWithoutSession_inviteInput, Prisma.courtUncheckedCreateWithoutSession_inviteInput>
+}
+
+export type courtUpsertWithoutSession_inviteInput = {
+  update: Prisma.XOR<Prisma.courtUpdateWithoutSession_inviteInput, Prisma.courtUncheckedUpdateWithoutSession_inviteInput>
+  create: Prisma.XOR<Prisma.courtCreateWithoutSession_inviteInput, Prisma.courtUncheckedCreateWithoutSession_inviteInput>
+  where?: Prisma.courtWhereInput
+}
+
+export type courtUpdateToOneWithWhereWithoutSession_inviteInput = {
+  where?: Prisma.courtWhereInput
+  data: Prisma.XOR<Prisma.courtUpdateWithoutSession_inviteInput, Prisma.courtUncheckedUpdateWithoutSession_inviteInput>
+}
+
+export type courtUpdateWithoutSession_inviteInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  occupancy_log?: Prisma.occupancy_logUpdateManyWithoutCourtNestedInput
+  review?: Prisma.reviewUpdateManyWithoutCourtNestedInput
+}
+
+export type courtUncheckedUpdateWithoutSession_inviteInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  occupancy_log?: Prisma.occupancy_logUncheckedUpdateManyWithoutCourtNestedInput
+  review?: Prisma.reviewUncheckedUpdateManyWithoutCourtNestedInput
 }
 
 
@@ -595,11 +693,13 @@ export type courtUncheckedUpdateWithoutOccupancy_logInput = {
 export type CourtCountOutputType = {
   occupancy_log: number
   review: number
+  session_invite: number
 }
 
 export type CourtCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   occupancy_log?: boolean | CourtCountOutputTypeCountOccupancy_logArgs
   review?: boolean | CourtCountOutputTypeCountReviewArgs
+  session_invite?: boolean | CourtCountOutputTypeCountSession_inviteArgs
 }
 
 /**
@@ -626,6 +726,13 @@ export type CourtCountOutputTypeCountReviewArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.reviewWhereInput
 }
 
+/**
+ * CourtCountOutputType without action
+ */
+export type CourtCountOutputTypeCountSession_inviteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.session_inviteWhereInput
+}
+
 
 export type courtSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -637,6 +744,7 @@ export type courtSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   player_live?: boolean
   occupancy_log?: boolean | Prisma.court$occupancy_logArgs<ExtArgs>
   review?: boolean | Prisma.court$reviewArgs<ExtArgs>
+  session_invite?: boolean | Prisma.court$session_inviteArgs<ExtArgs>
   _count?: boolean | Prisma.CourtCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["court"]>
 
@@ -674,6 +782,7 @@ export type courtOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type courtInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   occupancy_log?: boolean | Prisma.court$occupancy_logArgs<ExtArgs>
   review?: boolean | Prisma.court$reviewArgs<ExtArgs>
+  session_invite?: boolean | Prisma.court$session_inviteArgs<ExtArgs>
   _count?: boolean | Prisma.CourtCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type courtIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -684,6 +793,7 @@ export type $courtPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     occupancy_log: Prisma.$occupancy_logPayload<ExtArgs>[]
     review: Prisma.$reviewPayload<ExtArgs>[]
+    session_invite: Prisma.$session_invitePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1089,6 +1199,7 @@ export interface Prisma__courtClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   occupancy_log<T extends Prisma.court$occupancy_logArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.court$occupancy_logArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$occupancy_logPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   review<T extends Prisma.court$reviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.court$reviewArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$reviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  session_invite<T extends Prisma.court$session_inviteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.court$session_inviteArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$session_invitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1563,6 +1674,30 @@ export type court$reviewArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
+}
+
+/**
+ * court.session_invite
+ */
+export type court$session_inviteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the session_invite
+   */
+  select?: Prisma.session_inviteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the session_invite
+   */
+  omit?: Prisma.session_inviteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.session_inviteInclude<ExtArgs> | null
+  where?: Prisma.session_inviteWhereInput
+  orderBy?: Prisma.session_inviteOrderByWithRelationInput | Prisma.session_inviteOrderByWithRelationInput[]
+  cursor?: Prisma.session_inviteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Session_inviteScalarFieldEnum | Prisma.Session_inviteScalarFieldEnum[]
 }
 
 /**

@@ -57,7 +57,9 @@ export const ModelName = {
   session: 'session',
   user: 'user',
   verification: 'verification',
-  occupancy_log: 'occupancy_log'
+  occupancy_log: 'occupancy_log',
+  session_invite: 'session_invite',
+  session_participant: 'session_participant'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -173,6 +175,35 @@ export const Occupancy_logScalarFieldEnum = {
 } as const
 
 export type Occupancy_logScalarFieldEnum = (typeof Occupancy_logScalarFieldEnum)[keyof typeof Occupancy_logScalarFieldEnum]
+
+
+export const Session_inviteScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  court_id: 'court_id',
+  host_id: 'host_id',
+  title: 'title',
+  skill_level: 'skill_level',
+  players_have: 'players_have',
+  spots_total: 'spots_total',
+  spots_filled: 'spots_filled',
+  starts_at: 'starts_at',
+  ends_at: 'ends_at',
+  status: 'status'
+} as const
+
+export type Session_inviteScalarFieldEnum = (typeof Session_inviteScalarFieldEnum)[keyof typeof Session_inviteScalarFieldEnum]
+
+
+export const Session_participantScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  session_id: 'session_id',
+  user_id: 'user_id'
+} as const
+
+export type Session_participantScalarFieldEnum = (typeof Session_participantScalarFieldEnum)[keyof typeof Session_participantScalarFieldEnum]
 
 
 export const SortOrder = {

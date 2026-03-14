@@ -390,7 +390,9 @@ export const ModelName = {
   session: 'session',
   user: 'user',
   verification: 'verification',
-  occupancy_log: 'occupancy_log'
+  occupancy_log: 'occupancy_log',
+  session_invite: 'session_invite',
+  session_participant: 'session_participant'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -406,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "court" | "review" | "session" | "user" | "verification" | "occupancy_log"
+    modelProps: "account" | "court" | "review" | "session" | "user" | "verification" | "occupancy_log" | "session_invite" | "session_participant"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -928,6 +930,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    session_invite: {
+      payload: Prisma.$session_invitePayload<ExtArgs>
+      fields: Prisma.session_inviteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.session_inviteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.session_inviteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>
+        }
+        findFirst: {
+          args: Prisma.session_inviteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.session_inviteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>
+        }
+        findMany: {
+          args: Prisma.session_inviteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>[]
+        }
+        create: {
+          args: Prisma.session_inviteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>
+        }
+        createMany: {
+          args: Prisma.session_inviteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.session_inviteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>[]
+        }
+        delete: {
+          args: Prisma.session_inviteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>
+        }
+        update: {
+          args: Prisma.session_inviteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>
+        }
+        deleteMany: {
+          args: Prisma.session_inviteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.session_inviteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.session_inviteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>[]
+        }
+        upsert: {
+          args: Prisma.session_inviteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_invitePayload>
+        }
+        aggregate: {
+          args: Prisma.Session_inviteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSession_invite>
+        }
+        groupBy: {
+          args: Prisma.session_inviteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Session_inviteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.session_inviteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Session_inviteCountAggregateOutputType> | number
+        }
+      }
+    }
+    session_participant: {
+      payload: Prisma.$session_participantPayload<ExtArgs>
+      fields: Prisma.session_participantFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.session_participantFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.session_participantFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>
+        }
+        findFirst: {
+          args: Prisma.session_participantFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.session_participantFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>
+        }
+        findMany: {
+          args: Prisma.session_participantFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>[]
+        }
+        create: {
+          args: Prisma.session_participantCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>
+        }
+        createMany: {
+          args: Prisma.session_participantCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.session_participantCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>[]
+        }
+        delete: {
+          args: Prisma.session_participantDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>
+        }
+        update: {
+          args: Prisma.session_participantUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>
+        }
+        deleteMany: {
+          args: Prisma.session_participantDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.session_participantUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.session_participantUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>[]
+        }
+        upsert: {
+          args: Prisma.session_participantUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$session_participantPayload>
+        }
+        aggregate: {
+          args: Prisma.Session_participantAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSession_participant>
+        }
+        groupBy: {
+          args: Prisma.session_participantGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Session_participantGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.session_participantCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Session_participantCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1064,6 +1214,35 @@ export const Occupancy_logScalarFieldEnum = {
 } as const
 
 export type Occupancy_logScalarFieldEnum = (typeof Occupancy_logScalarFieldEnum)[keyof typeof Occupancy_logScalarFieldEnum]
+
+
+export const Session_inviteScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  court_id: 'court_id',
+  host_id: 'host_id',
+  title: 'title',
+  skill_level: 'skill_level',
+  players_have: 'players_have',
+  spots_total: 'spots_total',
+  spots_filled: 'spots_filled',
+  starts_at: 'starts_at',
+  ends_at: 'ends_at',
+  status: 'status'
+} as const
+
+export type Session_inviteScalarFieldEnum = (typeof Session_inviteScalarFieldEnum)[keyof typeof Session_inviteScalarFieldEnum]
+
+
+export const Session_participantScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  session_id: 'session_id',
+  user_id: 'user_id'
+} as const
+
+export type Session_participantScalarFieldEnum = (typeof Session_participantScalarFieldEnum)[keyof typeof Session_participantScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1274,6 +1453,8 @@ export type GlobalOmitConfig = {
   user?: Prisma.userOmit
   verification?: Prisma.verificationOmit
   occupancy_log?: Prisma.occupancy_logOmit
+  session_invite?: Prisma.session_inviteOmit
+  session_participant?: Prisma.session_participantOmit
 }
 
 /* Types for Logging */

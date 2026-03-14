@@ -54,3 +54,13 @@ export type verification = Prisma.verificationModel
  * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
  */
 export type occupancy_log = Prisma.occupancy_logModel
+/**
+ * Model session_invite
+ * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ */
+export type session_invite = Prisma.session_inviteModel
+/**
+ * Model session_participant
+ * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ */
+export type session_participant = Prisma.session_participantModel
