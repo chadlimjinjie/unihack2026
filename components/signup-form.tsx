@@ -19,19 +19,33 @@ import { authClient } from "@/lib/auth-client"
 import { useForm } from "@tanstack/react-form"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { z } from "zod"
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+
+  const formSchema = z.object({
+    name: z
+      .string()
+      .min(1, 'Full name is required'),
+    email: z
+      .email('Must be a valid email')
+      .min(1, 'Email is required'),
+    password: z
+      .string()
+      .min(1, 'Password is required')
+      // .min(8, 'Password must be at least 8 characters')
+      .regex(/[0-9]/, 'Password must contain at least one number'),
+  })
 
   const form = useForm({
     defaultValues: {
       name: "",
       email: "",
       password: "",
-      image: "",
     },
-    // validators: {
-    //   onSubmit: formSchema,
-    // },
+    validators: {
+      onChange: formSchema,
+    },
     onSubmit: async ({ value }) => {
 
 
