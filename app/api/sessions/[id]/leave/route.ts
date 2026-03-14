@@ -5,7 +5,7 @@ import { NextRequest } from "next/server"
 
 export async function POST(
     _req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const session = await auth.api.getSession({ headers: await headers() })
     if (!session) {

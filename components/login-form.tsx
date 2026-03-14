@@ -47,7 +47,7 @@ export function LoginForm({
         },
         onSuccess: (ctx) => {
           // redirect to the dashboard or sign in page
-          redirect("/dashboard")
+          redirect("/")
         }
       })
     }
