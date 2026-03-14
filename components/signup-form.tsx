@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
 import { useForm } from "@tanstack/react-form"
+import { redirect } from "next/navigation"
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
@@ -45,6 +46,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         },
         onSuccess: (ctx) => {
           // redirect to the dashboard or sign in page
+          redirect("/dashboard");
         },
         onError: (ctx) => {
           // display the error message
