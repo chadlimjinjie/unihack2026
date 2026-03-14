@@ -30,21 +30,15 @@ export type AggregateCourt = {
 export type CourtAvgAggregateOutputType = {
   id: number | null
   player_live: number | null
-<<<<<<< HEAD
   longitude: number | null
   latitude: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtSumAggregateOutputType = {
   id: bigint | null
   player_live: bigint | null
-<<<<<<< HEAD
   longitude: number | null
   latitude: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtMinAggregateOutputType = {
@@ -55,11 +49,8 @@ export type CourtMinAggregateOutputType = {
   location: string | null
   image: string | null
   player_live: bigint | null
-<<<<<<< HEAD
   longitude: number | null
   latitude: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtMaxAggregateOutputType = {
@@ -70,11 +61,8 @@ export type CourtMaxAggregateOutputType = {
   location: string | null
   image: string | null
   player_live: bigint | null
-<<<<<<< HEAD
   longitude: number | null
   latitude: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtCountAggregateOutputType = {
@@ -85,11 +73,8 @@ export type CourtCountAggregateOutputType = {
   location: number
   image: number
   player_live: number
-<<<<<<< HEAD
   longitude: number
   latitude: number
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   _all: number
 }
 
@@ -97,21 +82,15 @@ export type CourtCountAggregateOutputType = {
 export type CourtAvgAggregateInputType = {
   id?: true
   player_live?: true
-<<<<<<< HEAD
   longitude?: true
   latitude?: true
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtSumAggregateInputType = {
   id?: true
   player_live?: true
-<<<<<<< HEAD
   longitude?: true
   latitude?: true
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtMinAggregateInputType = {
@@ -122,11 +101,8 @@ export type CourtMinAggregateInputType = {
   location?: true
   image?: true
   player_live?: true
-<<<<<<< HEAD
   longitude?: true
   latitude?: true
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtMaxAggregateInputType = {
@@ -137,11 +113,8 @@ export type CourtMaxAggregateInputType = {
   location?: true
   image?: true
   player_live?: true
-<<<<<<< HEAD
   longitude?: true
   latitude?: true
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtCountAggregateInputType = {
@@ -152,11 +125,8 @@ export type CourtCountAggregateInputType = {
   location?: true
   image?: true
   player_live?: true
-<<<<<<< HEAD
   longitude?: true
   latitude?: true
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   _all?: true
 }
 
@@ -254,11 +224,8 @@ export type CourtGroupByOutputType = {
   location: string | null
   image: string | null
   player_live: bigint | null
-<<<<<<< HEAD
   longitude: number | null
   latitude: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   _count: CourtCountAggregateOutputType | null
   _avg: CourtAvgAggregateOutputType | null
   _sum: CourtSumAggregateOutputType | null
@@ -292,11 +259,8 @@ export type courtWhereInput = {
   location?: Prisma.StringNullableFilter<"court"> | string | null
   image?: Prisma.StringNullableFilter<"court"> | string | null
   player_live?: Prisma.BigIntNullableFilter<"court"> | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.FloatNullableFilter<"court"> | number | null
   latitude?: Prisma.FloatNullableFilter<"court"> | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.Occupancy_logListRelationFilter
   review?: Prisma.ReviewListRelationFilter
   session_invite?: Prisma.Session_inviteListRelationFilter
@@ -310,11 +274,8 @@ export type courtOrderByWithRelationInput = {
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   player_live?: Prisma.SortOrderInput | Prisma.SortOrder
-<<<<<<< HEAD
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logOrderByRelationAggregateInput
   review?: Prisma.reviewOrderByRelationAggregateInput
   session_invite?: Prisma.session_inviteOrderByRelationAggregateInput
@@ -331,11 +292,8 @@ export type courtWhereUniqueInput = Prisma.AtLeast<{
   location?: Prisma.StringNullableFilter<"court"> | string | null
   image?: Prisma.StringNullableFilter<"court"> | string | null
   player_live?: Prisma.BigIntNullableFilter<"court"> | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.FloatNullableFilter<"court"> | number | null
   latitude?: Prisma.FloatNullableFilter<"court"> | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.Occupancy_logListRelationFilter
   review?: Prisma.ReviewListRelationFilter
   session_invite?: Prisma.Session_inviteListRelationFilter
@@ -349,11 +307,8 @@ export type courtOrderByWithAggregationInput = {
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   player_live?: Prisma.SortOrderInput | Prisma.SortOrder
-<<<<<<< HEAD
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   _count?: Prisma.courtCountOrderByAggregateInput
   _avg?: Prisma.courtAvgOrderByAggregateInput
   _max?: Prisma.courtMaxOrderByAggregateInput
@@ -372,11 +327,8 @@ export type courtScalarWhereWithAggregatesInput = {
   location?: Prisma.StringNullableWithAggregatesFilter<"court"> | string | null
   image?: Prisma.StringNullableWithAggregatesFilter<"court"> | string | null
   player_live?: Prisma.BigIntNullableWithAggregatesFilter<"court"> | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.FloatNullableWithAggregatesFilter<"court"> | number | null
   latitude?: Prisma.FloatNullableWithAggregatesFilter<"court"> | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtCreateInput = {
@@ -387,11 +339,8 @@ export type courtCreateInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logCreateNestedManyWithoutCourtInput
   review?: Prisma.reviewCreateNestedManyWithoutCourtInput
   session_invite?: Prisma.session_inviteCreateNestedManyWithoutCourtInput
@@ -405,11 +354,8 @@ export type courtUncheckedCreateInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUncheckedCreateNestedManyWithoutCourtInput
   review?: Prisma.reviewUncheckedCreateNestedManyWithoutCourtInput
   session_invite?: Prisma.session_inviteUncheckedCreateNestedManyWithoutCourtInput
@@ -423,11 +369,8 @@ export type courtUpdateInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUpdateManyWithoutCourtNestedInput
   review?: Prisma.reviewUpdateManyWithoutCourtNestedInput
   session_invite?: Prisma.session_inviteUpdateManyWithoutCourtNestedInput
@@ -441,11 +384,8 @@ export type courtUncheckedUpdateInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUncheckedUpdateManyWithoutCourtNestedInput
   review?: Prisma.reviewUncheckedUpdateManyWithoutCourtNestedInput
   session_invite?: Prisma.session_inviteUncheckedUpdateManyWithoutCourtNestedInput
@@ -459,11 +399,8 @@ export type courtCreateManyInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtUpdateManyMutationInput = {
@@ -474,11 +411,8 @@ export type courtUpdateManyMutationInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtUncheckedUpdateManyInput = {
@@ -489,11 +423,8 @@ export type courtUncheckedUpdateManyInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtCountOrderByAggregateInput = {
@@ -504,21 +435,15 @@ export type courtCountOrderByAggregateInput = {
   location?: Prisma.SortOrder
   image?: Prisma.SortOrder
   player_live?: Prisma.SortOrder
-<<<<<<< HEAD
   longitude?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   player_live?: Prisma.SortOrder
-<<<<<<< HEAD
   longitude?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtMaxOrderByAggregateInput = {
@@ -529,11 +454,8 @@ export type courtMaxOrderByAggregateInput = {
   location?: Prisma.SortOrder
   image?: Prisma.SortOrder
   player_live?: Prisma.SortOrder
-<<<<<<< HEAD
   longitude?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtMinOrderByAggregateInput = {
@@ -544,21 +466,15 @@ export type courtMinOrderByAggregateInput = {
   location?: Prisma.SortOrder
   image?: Prisma.SortOrder
   player_live?: Prisma.SortOrder
-<<<<<<< HEAD
   longitude?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type courtSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   player_live?: Prisma.SortOrder
-<<<<<<< HEAD
   longitude?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
 
 export type CourtNullableScalarRelationFilter = {
@@ -587,7 +503,6 @@ export type NullableBigIntFieldUpdateOperationsInput = {
   divide?: bigint | number
 }
 
-<<<<<<< HEAD
 export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -596,8 +511,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 export type courtCreateNestedOneWithoutReviewInput = {
   create?: Prisma.XOR<Prisma.courtCreateWithoutReviewInput, Prisma.courtUncheckedCreateWithoutReviewInput>
   connectOrCreate?: Prisma.courtCreateOrConnectWithoutReviewInput
@@ -652,11 +565,8 @@ export type courtCreateWithoutReviewInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logCreateNestedManyWithoutCourtInput
   session_invite?: Prisma.session_inviteCreateNestedManyWithoutCourtInput
 }
@@ -669,11 +579,8 @@ export type courtUncheckedCreateWithoutReviewInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUncheckedCreateNestedManyWithoutCourtInput
   session_invite?: Prisma.session_inviteUncheckedCreateNestedManyWithoutCourtInput
 }
@@ -702,11 +609,8 @@ export type courtUpdateWithoutReviewInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUpdateManyWithoutCourtNestedInput
   session_invite?: Prisma.session_inviteUpdateManyWithoutCourtNestedInput
 }
@@ -719,11 +623,8 @@ export type courtUncheckedUpdateWithoutReviewInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUncheckedUpdateManyWithoutCourtNestedInput
   session_invite?: Prisma.session_inviteUncheckedUpdateManyWithoutCourtNestedInput
 }
@@ -736,11 +637,8 @@ export type courtCreateWithoutOccupancy_logInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   review?: Prisma.reviewCreateNestedManyWithoutCourtInput
   session_invite?: Prisma.session_inviteCreateNestedManyWithoutCourtInput
 }
@@ -753,11 +651,8 @@ export type courtUncheckedCreateWithoutOccupancy_logInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   review?: Prisma.reviewUncheckedCreateNestedManyWithoutCourtInput
   session_invite?: Prisma.session_inviteUncheckedCreateNestedManyWithoutCourtInput
 }
@@ -786,11 +681,8 @@ export type courtUpdateWithoutOccupancy_logInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   review?: Prisma.reviewUpdateManyWithoutCourtNestedInput
   session_invite?: Prisma.session_inviteUpdateManyWithoutCourtNestedInput
 }
@@ -803,11 +695,8 @@ export type courtUncheckedUpdateWithoutOccupancy_logInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   review?: Prisma.reviewUncheckedUpdateManyWithoutCourtNestedInput
   session_invite?: Prisma.session_inviteUncheckedUpdateManyWithoutCourtNestedInput
 }
@@ -820,11 +709,8 @@ export type courtCreateWithoutSession_inviteInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logCreateNestedManyWithoutCourtInput
   review?: Prisma.reviewCreateNestedManyWithoutCourtInput
 }
@@ -837,11 +723,8 @@ export type courtUncheckedCreateWithoutSession_inviteInput = {
   location?: string | null
   image?: string | null
   player_live?: bigint | number | null
-<<<<<<< HEAD
   longitude?: number | null
   latitude?: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUncheckedCreateNestedManyWithoutCourtInput
   review?: Prisma.reviewUncheckedCreateNestedManyWithoutCourtInput
 }
@@ -870,11 +753,8 @@ export type courtUpdateWithoutSession_inviteInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUpdateManyWithoutCourtNestedInput
   review?: Prisma.reviewUpdateManyWithoutCourtNestedInput
 }
@@ -887,11 +767,8 @@ export type courtUncheckedUpdateWithoutSession_inviteInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_live?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-<<<<<<< HEAD
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: Prisma.occupancy_logUncheckedUpdateManyWithoutCourtNestedInput
   review?: Prisma.reviewUncheckedUpdateManyWithoutCourtNestedInput
 }
@@ -953,11 +830,8 @@ export type courtSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   location?: boolean
   image?: boolean
   player_live?: boolean
-<<<<<<< HEAD
   longitude?: boolean
   latitude?: boolean
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   occupancy_log?: boolean | Prisma.court$occupancy_logArgs<ExtArgs>
   review?: boolean | Prisma.court$reviewArgs<ExtArgs>
   session_invite?: boolean | Prisma.court$session_inviteArgs<ExtArgs>
@@ -972,11 +846,8 @@ export type courtSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   location?: boolean
   image?: boolean
   player_live?: boolean
-<<<<<<< HEAD
   longitude?: boolean
   latitude?: boolean
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }, ExtArgs["result"]["court"]>
 
 export type courtSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -987,11 +858,8 @@ export type courtSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   location?: boolean
   image?: boolean
   player_live?: boolean
-<<<<<<< HEAD
   longitude?: boolean
   latitude?: boolean
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }, ExtArgs["result"]["court"]>
 
 export type courtSelectScalar = {
@@ -1002,17 +870,11 @@ export type courtSelectScalar = {
   location?: boolean
   image?: boolean
   player_live?: boolean
-<<<<<<< HEAD
   longitude?: boolean
   latitude?: boolean
 }
 
 export type courtOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "updated_at" | "name" | "location" | "image" | "player_live" | "longitude" | "latitude", ExtArgs["result"]["court"]>
-=======
-}
-
-export type courtOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "updated_at" | "name" | "location" | "image" | "player_live", ExtArgs["result"]["court"]>
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 export type courtInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   occupancy_log?: boolean | Prisma.court$occupancy_logArgs<ExtArgs>
   review?: boolean | Prisma.court$reviewArgs<ExtArgs>
@@ -1037,11 +899,8 @@ export type $courtPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     location: string | null
     image: string | null
     player_live: bigint | null
-<<<<<<< HEAD
     longitude: number | null
     latitude: number | null
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
   }, ExtArgs["result"]["court"]>
   composites: {}
 }
@@ -1475,11 +1334,8 @@ export interface courtFieldRefs {
   readonly location: Prisma.FieldRef<"court", 'String'>
   readonly image: Prisma.FieldRef<"court", 'String'>
   readonly player_live: Prisma.FieldRef<"court", 'BigInt'>
-<<<<<<< HEAD
   readonly longitude: Prisma.FieldRef<"court", 'Float'>
   readonly latitude: Prisma.FieldRef<"court", 'Float'>
-=======
->>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 }
     
 
