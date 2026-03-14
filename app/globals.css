@@ -128,3 +128,21 @@
     @apply font-sans;
     }
 }
+
+.landingBackground {
+  position: relative;
+  background-image: url('/court-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--background); /* fallback */
+  z-index: 0;
+}
+
+.landingBackground::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--background) 0%, transparent 20%, transparent 80%, var(--background) 100%);
+  z-index: 1;
+}
