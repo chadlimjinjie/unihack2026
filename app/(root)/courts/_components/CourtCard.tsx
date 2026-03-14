@@ -20,7 +20,7 @@ export default function CourtCard({
             <img
                 src={image ?? "https://avatar.vercel.sh/shadcn1"}
                 alt="Court cover"
-                className="relative z-20 aspect-video w-full object-cover grayscale"
+                className="relative z-20 aspect-video w-full object-cover"
                 // className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
             />
             <CardHeader>
