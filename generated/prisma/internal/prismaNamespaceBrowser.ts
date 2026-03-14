@@ -56,7 +56,10 @@ export const ModelName = {
   review: 'review',
   session: 'session',
   user: 'user',
-  verification: 'verification'
+  verification: 'verification',
+  occupancy_log: 'occupancy_log',
+  session_invite: 'session_invite',
+  session_participant: 'session_participant'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -100,7 +103,10 @@ export const CourtScalarFieldEnum = {
   updated_at: 'updated_at',
   name: 'name',
   location: 'location',
-  image: 'image'
+  image: 'image',
+  player_live: 'player_live',
+  longitude: 'longitude',
+  latitude: 'latitude'
 } as const
 
 export type CourtScalarFieldEnum = (typeof CourtScalarFieldEnum)[keyof typeof CourtScalarFieldEnum]
@@ -161,6 +167,45 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const Occupancy_logScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  court_id: 'court_id',
+  player_ct: 'player_ct'
+} as const
+
+export type Occupancy_logScalarFieldEnum = (typeof Occupancy_logScalarFieldEnum)[keyof typeof Occupancy_logScalarFieldEnum]
+
+
+export const Session_inviteScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  court_id: 'court_id',
+  host_id: 'host_id',
+  title: 'title',
+  skill_level: 'skill_level',
+  players_have: 'players_have',
+  spots_total: 'spots_total',
+  spots_filled: 'spots_filled',
+  starts_at: 'starts_at',
+  ends_at: 'ends_at',
+  status: 'status'
+} as const
+
+export type Session_inviteScalarFieldEnum = (typeof Session_inviteScalarFieldEnum)[keyof typeof Session_inviteScalarFieldEnum]
+
+
+export const Session_participantScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  session_id: 'session_id',
+  user_id: 'user_id'
+} as const
+
+export type Session_participantScalarFieldEnum = (typeof Session_participantScalarFieldEnum)[keyof typeof Session_participantScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -48,23 +48,15 @@ export default function EmbeddedMap(): JSX.Element {
           if (!coords || (loc.type !== 'basketball' && loc.type !== 'key')) return;
 
           const el = document.createElement('div');
-          if (loc.type === 'basketball') {
-            el.innerHTML = `
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="12" cy="12" r="10" fill="#ff6b00" />
-                <path d="M2 12a10 10 0 0 0 20 0" stroke="#fff" stroke-width="1.2" fill="none" />
-                <path d="M12 2a10 10 0 0 0 0 20" stroke="#fff" stroke-width="1.2" fill="none" />
-                <path d="M5 5l14 14" stroke="#fff" stroke-width="1" stroke-linecap="round" />
-                <path d="M19 5L5 19" stroke="#fff" stroke-width="1" stroke-linecap="round" />
-              </svg>
-            `;
-            el.style.width = '28px';
-            el.style.height = '28px';
-            el.style.display = 'inline-block';
-            el.style.transform = 'translate(-50%, -50%)';
-            el.setAttribute('aria-label', loc.title ?? 'Basketball');
-            el.setAttribute('role', 'img');
-          } else {
+                    if (loc.type === 'basketball') {
+                      el.innerHTML = `<img src="/icons/basketball-15.svg" alt="Basketball court" style="width:28px;height:28px;display:inline-block;transform:translate(-50%,-50%);"/>`;
+                      el.style.width = '28px';
+                      el.style.height = '28px';
+                      el.style.display = 'inline-block';
+                      el.style.transform = 'translate(-50%, -50%)';
+                      el.setAttribute('aria-label', loc.title ?? 'Basketball court');
+                      el.setAttribute('role', 'img');
+                    } else {
             el.style.width = '14px';
             el.style.height = '14px';
             el.style.background = 'rgba(30, 144, 255, 0.85)';
@@ -76,10 +68,18 @@ export default function EmbeddedMap(): JSX.Element {
             el.setAttribute('role', 'img');
           }
 
-          const marker = new mapboxgl.Marker({ element: el })
-            .setLngLat(coords as [number, number])
-            .setPopup(new mapboxgl.Popup({ offset: 12 }).setText(loc.title ?? ''))
-            .addTo(mapRef.current as mapboxgl.Map);
+                    const popupHtml = `
+                      <div style="min-width:160px">
+                        <strong>${loc.title ?? ''}</strong>
+                        ${loc.subtitle ? `<div style="font-size:12px;color:var(--muted-foreground)">${loc.subtitle}</div>` : ''}
+                        ${loc.courtId ? `<div style="margin-top:6px"><a href="/courts/${loc.courtId}" style="color:#0070f3">View court</a></div>` : ''}
+                      </div>
+                    `;
+
+                    const marker = new mapboxgl.Marker({ element: el })
+                        .setLngLat(coords as [number, number])
+                        .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml))
+                        .addTo(mapRef.current as mapboxgl.Map);
 
           markersRef.current.push(marker);
         });

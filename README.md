@@ -1,6 +1,5 @@
 UNIHACK 2026 - BAM B(ball)
- 
- 
+
  Court Activity
 
     Bluetooth device scans nearby phones/wearables
