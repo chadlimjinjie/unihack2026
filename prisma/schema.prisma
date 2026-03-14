@@ -35,6 +35,7 @@ model court {
   updated_at DateTime? @db.Timestamptz(6)
   name       String?
   location   String?
+  image      String?
   review     review[]
 }
 
@@ -44,9 +45,13 @@ model review {
   created_at DateTime  @default(now()) @db.Timestamptz(6)
   updated_at DateTime? @default(now()) @db.Timestamptz(6)
   court_id   BigInt?
-  user_id    String?   @unique
+  user_id    String?
+  thoughts   String?
+  stars      Int?
   court      court?    @relation(fields: [court_id], references: [id], onDelete: Cascade)
   user       user?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, court_id], map: "unique_user_court_review")
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -79,7 +84,7 @@ model user {
   banReason     String?
   banExpires    DateTime? @db.Timestamptz(6)
   account       account[]
-  review        review?
+  review        review[]
   session       session[]
 }
 

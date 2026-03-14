@@ -7,7 +7,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
 import { Label } from "@/components/ui/label"
 import {
     ChartConfig,
@@ -23,8 +22,6 @@ import {
     CartesianGrid,
     ResponsiveContainer,
 } from "recharts"
-import { cn } from "@/lib/utils"
-import { useParams } from "next/navigation";
 
 const chartData = [
     { time: "8AM", people: 1 },
@@ -43,21 +40,67 @@ const chartConfig: ChartConfig = {
     },
 } satisfies ChartConfig
 
-export default function CourtPage({ court }: { court: any }) {
+type Review = {
+    id: bigint
+    thoughts: string | null
+    stars: number | null
+    created_at: Date
+    user: {
+        name: string
+        image: string | null
+    } | null
+}
+
+type Court = {
+    id: bigint
+    name: string | null
+    location: string | null
+    image: string | null
+    review: Review[]
+}
+
+function StarDisplay({ rating }: { rating: number }) {
+    const rounded = Math.round(rating)
+    return (
+        <div className="flex gap-0.5">
+            {Array.from({ length: 5 }).map((_, i) => (
+                <span key={i} className={`text-2xl ${i < rounded ? "text-yellow-400" : "text-muted-foreground/30"}`}>
+                    ★
+                </span>
+            ))}
+        </div>
+    )
+}
+
+function getInitials(name: string) {
+    return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
+}
+
+export default function CourtPage({ court }: { court: Court | null }) {
+
+    const reviews = court?.review ?? []
+
+    const avgRating = reviews.length > 0
+        ? reviews.reduce((sum, r) => sum + (r.stars ?? 0), 0) / reviews.length
+        : 0
 
     return (
         <div className="container mx-auto p-8 max-w-4xl">
+
             {/* Court Name */}
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-gradient-to-r from-foreground to-primary/80 bg-clip-text text-transparent">
-                {court?.name || "Court Name"}
+                {court?.name ?? "Court Name"}
             </h1>
 
-            {/* Photo Box */}
+            {/* Court Image */}
             <div className="flex justify-center mb-8">
-                <Card className="w-[90vw] md:w-[70vw] h-64 md:h-80 flex items-center justify-center border-2 border-dashed border-border bg-muted rounded-2xl shadow-xl">
-                    <Skeleton className="w-[90%] h-[90%] rounded-xl" />
-                    <p className="absolute text-muted-foreground text-lg font-medium">Court Photo</p>
-                </Card>
+                <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl border border-border">
+                    <img
+                        src={court?.image ?? "https://avatar.vercel.sh/shadcn1"}
+                        alt={court?.name ?? "Court"}
+                        className="w-full h-full object-cover"
+                    />
+                </div>
             </div>
 
             {/* Location and People Count */}
@@ -68,7 +111,7 @@ export default function CourtPage({ court }: { court: any }) {
                     </CardHeader>
                     <CardContent>
                         <Label className="text-lg">
-                            {court?.location || "Court Street, Local Park"}
+                            {court?.location ?? "Location not set"}
                         </Label>
                     </CardContent>
                 </Card>
@@ -112,32 +155,45 @@ export default function CourtPage({ court }: { court: any }) {
                 </CardContent>
             </Card>
 
-            {/* Reviews and Rating */}
+            {/* Reviews */}
             <Card>
                 <CardHeader>
                     <CardTitle className="text-2xl">Reviews & Rating</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                    <div className="flex items-center gap-3">
-                        <div className="flex text-2xl">⭐⭐⭐⭐⭐</div>
-                        <span className="text-2xl font-bold text-primary">4.8 (127 reviews)</span>
-                    </div>
+
+                    {/* Average rating */}
+                    {reviews.length > 0 ? (
+                        <div className="flex items-center gap-3">
+                            <StarDisplay rating={avgRating} />
+                            <span className="text-2xl font-bold text-primary">
+                                {avgRating.toFixed(1)} ({reviews.length} {reviews.length === 1 ? "review" : "reviews"})
+                            </span>
+                        </div>
+                    ) : (
+                        <p className="text-muted-foreground">No reviews yet.</p>
+                    )}
+
+                    {/* Individual reviews */}
                     <div className="space-y-4">
-                        <div className="flex gap-3 p-4 bg-muted/50 rounded-xl">
-                            <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center font-semibold text-primary">JD</div>
-                            <div className="flex-1">
-                                <p className="font-semibold">John Doe</p>
-                                <p className="text-sm text-muted-foreground">Great court, always busy in evenings!</p>
+                        {reviews.map((review) => (
+                            <div key={String(review.id)} className="flex gap-3 p-4 bg-muted/50 rounded-xl">
+                                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center font-semibold text-primary shrink-0">
+                                    {review.user?.name ? getInitials(review.user.name) : "?"}
+                                </div>
+                                <div className="flex-1">
+                                    <div className="flex items-center justify-between flex-wrap gap-2">
+                                        <p className="font-semibold">{review.user?.name ?? "Anonymous"}</p>
+                                        {review.stars != null && <StarDisplay rating={review.stars} />}
+                                    </div>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                        {review.thoughts ?? "No comment left."}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex gap-3 p-4 bg-muted/50 rounded-xl">
-                            <div className="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center font-semibold text-secondary">SJ</div>
-                            <div className="flex-1">
-                                <p className="font-semibold">Sarah Johnson</p>
-                                <p className="text-sm text-muted-foreground">Perfect lighting and surface condition.</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
+
                 </CardContent>
             </Card>
         </div>
