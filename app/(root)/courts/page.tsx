@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tabs"
 import Link from "next/link"
 import CourtCard from "./_components/CourtCard"
+import EmbeddedMap from '@/components/embedded-map'
 
 export default async function Page() {
 
@@ -34,14 +35,15 @@ export default async function Page() {
                 <TabsContent value="map">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Map goes here</CardTitle>
+                            <CardTitle>Courts map</CardTitle>
                             <CardDescription>
-                                Track performance and user engagement metrics. Monitor trends and
-                                identify growth opportunities.
+                                View saved courts locations on an interactive map.
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="text-sm text-muted-foreground">
-                            Page views are up 25% compared to last month.
+                        <CardContent className="p-0">
+                            <div className="h-[60vh] w-full">
+                                <EmbeddedMap />
+                            </div>
                         </CardContent>
                     </Card>
                 </TabsContent>
