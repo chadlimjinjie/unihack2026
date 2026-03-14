@@ -14,13 +14,17 @@ import {
     Select, SelectContent, SelectItem,
     SelectTrigger, SelectValue,
 } from "@/components/ui/select"
-import { MapPin, Clock, Users, Plus, LogIn, Crown } from "lucide-react"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Calendar } from "@/components/ui/calendar"
+import { MapPin, Clock, Users, Plus, LogIn, Crown, CalendarIcon, ChevronDown } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { format } from "date-fns"
 
 type Court = {
     id: number
     name: string | null
     location: string | null
+    image: string | null
 }
 
 type Participant = {
@@ -84,6 +88,7 @@ export default function SessionsClient({
 }) {
     const router = useRouter()
     const [createOpen, setCreateOpen] = useState(false)
+    const [step, setStep] = useState<"details" | "court">("details")
     const [submitting, setSubmitting] = useState(false)
     const [joining, setJoining] = useState<number | null>(null)
     const [error, setError] = useState("")
@@ -94,8 +99,24 @@ export default function SessionsClient({
     const [skillLevel, setSkillLevel] = useState("Any")
     const [playersHave, setPlayersHave] = useState("1")
     const [spotsTotal, setSpotsTotal] = useState("10")
-    const [startsAt, setStartsAt] = useState("")
-    const [endsAt, setEndsAt] = useState("")
+    const [startDate, setStartDate] = useState<Date | undefined>(undefined)
+    const [startHour, setStartHour] = useState("18")
+    const [startMin, setStartMin] = useState("00")
+    const [endDate, setEndDate] = useState<Date | undefined>(undefined)
+    const [endHour, setEndHour] = useState("20")
+    const [endMin, setEndMin] = useState("00")
+    const [startCalOpen, setStartCalOpen] = useState(false)
+    const [endCalOpen, setEndCalOpen] = useState(false)
+
+    function buildDateTime(date: Date | undefined, hour: string, min: string): string {
+        if (!date) return ""
+        const d = new Date(date)
+        d.setHours(Number(hour), Number(min), 0, 0)
+        return d.toISOString()
+    }
+
+    const startsAt = buildDateTime(startDate, startHour, startMin)
+    const endsAt = buildDateTime(endDate, endHour, endMin)
 
     async function handleCreateSession() {
         if (!courtId || !startsAt || !endsAt) {
@@ -173,7 +194,9 @@ export default function SessionsClient({
     function resetForm() {
         setCourtId(""); setTitle(""); setSkillLevel("Any")
         setPlayersHave("1"); setSpotsTotal("10")
-        setStartsAt(""); setEndsAt(""); setError("")
+        setStartDate(undefined); setStartHour("18"); setStartMin("00")
+        setEndDate(undefined); setEndHour("20"); setEndMin("00")
+        setError(""); setStep("details")
     }
 
     const isInSession = (s: SessionInvite) =>
@@ -312,109 +335,201 @@ export default function SessionsClient({
 
             {/* Create Session Dialog */}
             <Dialog open={createOpen} onOpenChange={(o) => { setCreateOpen(o); if (!o) resetForm() }}>
-                <DialogContent className="sm:max-w-lg">
+                <DialogContent className="sm:max-w-4xl">
                     <DialogHeader>
-                        <DialogTitle>Start a Session</DialogTitle>
-                        <DialogDescription>Set up your game and invite others to join.</DialogDescription>
+                        <DialogTitle>
+                            {step === "details" ? "Start a Session" : "Pick a Court"}
+                        </DialogTitle>
+                        <DialogDescription>
+                            {step === "details"
+                                ? "Set up your game details, then choose a court."
+                                : "Select the court where your session will take place."}
+                        </DialogDescription>
                     </DialogHeader>
 
-                    <div className="space-y-4 py-2">
-                        {/* Title */}
-                        <div className="space-y-1.5">
-                            <Label htmlFor="session-title">Title <span className="text-muted-foreground">(optional)</span></Label>
-                            <Input
-                                id="session-title"
-                                placeholder="e.g. Friday evening 5v5"
-                                value={title}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-                            />
-                        </div>
-
-                        {/* Court */}
-                        <div className="space-y-1.5">
-                            <Label>Court <span className="text-red-500">*</span></Label>
-                            <Select value={courtId} onValueChange={setCourtId}>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select a court" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {courts.map((c) => (
-                                        <SelectItem key={c.id} value={String(c.id)}>
-                                            {c.name} {c.location ? `· ${c.location}` : ""}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        {/* Skill level */}
-                        <div className="space-y-1.5">
-                            <Label>Skill Level</Label>
-                            <Select value={skillLevel} onValueChange={setSkillLevel}>
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {SKILL_LEVELS.map((l) => (
-                                        <SelectItem key={l} value={l}>{l}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        {/* Players row */}
-                        <div className="grid grid-cols-2 gap-4">
+                    {/* Step 1 — Details */}
+                    {step === "details" && (
+                        <div className="space-y-4 py-2">
+                            {/* Title */}
                             <div className="space-y-1.5">
-                                <Label htmlFor="players-have">Players you have</Label>
+                                <Label htmlFor="session-title">Title <span className="text-muted-foreground">(optional)</span></Label>
                                 <Input
-                                    id="players-have"
-                                    type="number" min="1" max="20"
-                                    value={playersHave}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPlayersHave(e.target.value)}
+                                    id="session-title"
+                                    placeholder="e.g. Friday evening 5v5"
+                                    value={title}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                                 />
                             </div>
+
+                            {/* Skill level */}
                             <div className="space-y-1.5">
-                                <Label htmlFor="spots-total">Spots to fill</Label>
-                                <Input
-                                    id="spots-total"
-                                    type="number" min="1" max="20"
-                                    value={spotsTotal}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSpotsTotal(e.target.value)}
-                                />
+                                <Label>Skill Level</Label>
+                                <Select value={skillLevel} onValueChange={setSkillLevel}>
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {SKILL_LEVELS.map((l) => (
+                                            <SelectItem key={l} value={l}>{l}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
                             </div>
+
+                            {/* Players row */}
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1.5">
+                                    <Label htmlFor="players-have">Players you have</Label>
+                                    <Input
+                                        id="players-have"
+                                        type="number" min="1" max="20"
+                                        value={playersHave}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPlayersHave(e.target.value)}
+                                    />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <Label htmlFor="spots-total">Spots to fill</Label>
+                                    <Input
+                                        id="spots-total"
+                                        type="number" min="1" max="20"
+                                        value={spotsTotal}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSpotsTotal(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Time row */}
+                            <div className="grid grid-cols-2 gap-4">
+                                {/* Start */}
+                                <div className="space-y-1.5">
+                                    <Label>Starts at <span className="text-red-500">*</span></Label>
+                                    <Popover open={startCalOpen} onOpenChange={setStartCalOpen}>
+                                        <PopoverTrigger asChild>
+                                            <Button variant="outline" className="w-full justify-between font-normal">
+                                                {startDate ? format(startDate, "EEE d MMM") : "Pick a date"}
+                                                <CalendarIcon className="w-4 h-4 text-muted-foreground" />
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-auto p-0" align="start">
+                                            <Calendar
+                                                mode="single"
+                                                selected={startDate}
+                                                onSelect={(d) => { setStartDate(d); setStartCalOpen(false) }}
+                                                disabled={(d) => d < new Date(new Date().setHours(0,0,0,0))}
+                                                initialFocus
+                                            />
+                                        </PopoverContent>
+                                    </Popover>
+                                    <Input
+                                        type="time"
+                                        className="mt-1"
+                                        value={`${startHour}:${startMin}`}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            const [h, m] = e.target.value.split(":")
+                                            setStartHour(h); setStartMin(m)
+                                        }}
+                                    />
+                                </div>
+                                {/* End */}
+                                <div className="space-y-1.5">
+                                    <Label>Ends at <span className="text-red-500">*</span></Label>
+                                    <Popover open={endCalOpen} onOpenChange={setEndCalOpen}>
+                                        <PopoverTrigger asChild>
+                                            <Button variant="outline" className="w-full justify-between font-normal">
+                                                {endDate ? format(endDate, "EEE d MMM") : "Pick a date"}
+                                                <CalendarIcon className="w-4 h-4 text-muted-foreground" />
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-auto p-0" align="start">
+                                            <Calendar
+                                                mode="single"
+                                                selected={endDate}
+                                                onSelect={(d) => { setEndDate(d); setEndCalOpen(false) }}
+                                                disabled={(d) => d < new Date(new Date().setHours(0,0,0,0))}
+                                                initialFocus
+                                            />
+                                        </PopoverContent>
+                                    </Popover>
+                                    <Input
+                                        type="time"
+                                        className="mt-1"
+                                        value={`${endHour}:${endMin}`}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            const [h, m] = e.target.value.split(":")
+                                            setEndHour(h); setEndMin(m)
+                                        }}
+                                    />
+                                </div>
+                            </div>
+
+                            {error && <p className="text-sm text-red-500">{error}</p>}
+
+                            <DialogFooter>
+                                <Button variant="ghost" onClick={() => { setCreateOpen(false); resetForm() }}>Cancel</Button>
+                                <Button
+                                    onClick={() => {
+                                        if (!startsAt || !endsAt) { setError("Please fill in start and end times."); return }
+                                        if (new Date(endsAt) <= new Date(startsAt)) { setError("End time must be after start time."); return }
+                                        setError("")
+                                        setStep("court")
+                                    }}
+                                >
+                                    Next: Pick a Court
+                                </Button>
+                            </DialogFooter>
                         </div>
+                    )}
 
-                        {/* Time row */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-1.5">
-                                <Label htmlFor="starts-at">Starts at <span className="text-red-500">*</span></Label>
-                                <Input
-                                    id="starts-at"
-                                    type="datetime-local"
-                                    value={startsAt}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStartsAt(e.target.value)}
-                                />
+                    {/* Step 2 — Court picker */}
+                    {step === "court" && (
+                        <div className="py-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[520px] overflow-y-auto pr-1">
+                                {courts.map((c) => (
+                                    <button
+                                        key={c.id}
+                                        type="button"
+                                        onClick={() => setCourtId(String(c.id))}
+                                        className={`text-left rounded-xl border p-0 transition-all hover:border-primary hover:shadow-md focus:outline-none overflow-hidden ${
+                                            courtId === String(c.id)
+                                                ? "border-primary ring-2 ring-primary shadow-md"
+                                                : "border-border"
+                                        }`}
+                                    >
+                                        <div className="w-full h-44 overflow-hidden bg-muted">
+                                            <img
+                                                src={c.image ?? "https://avatar.vercel.sh/shadcn1"}
+                                                alt={c.name ?? "Court"}
+                                                className="w-full h-full object-cover transition-transform hover:scale-105"
+                                            />
+                                        </div>
+                                        <div className="p-3">
+                                            <p className="font-semibold text-base leading-tight">{c.name ?? "Unnamed Court"}</p>
+                                            {c.location && (
+                                                <p className="text-sm text-muted-foreground mt-1 flex items-center gap-1">
+                                                    <MapPin className="w-3.5 h-3.5 shrink-0" />{c.location}
+                                                </p>
+                                            )}
+                                            {courtId === String(c.id) && (
+                                                <p className="text-xs text-primary font-semibold mt-2">✓ Selected</p>
+                                            )}
+                                        </div>
+                                    </button>
+                                ))}
                             </div>
-                            <div className="space-y-1.5">
-                                <Label htmlFor="ends-at">Ends at <span className="text-red-500">*</span></Label>
-                                <Input
-                                    id="ends-at"
-                                    type="datetime-local"
-                                    value={endsAt}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEndsAt(e.target.value)}
-                                />
-                            </div>
+
+                            {error && <p className="text-sm text-red-500 mt-3">{error}</p>}
+
+                            <DialogFooter className="mt-4">
+                                <Button variant="ghost" onClick={() => setStep("details")}>Back</Button>
+                                <Button
+                                    onClick={handleCreateSession}
+                                    disabled={!courtId || submitting}
+                                >
+                                    {submitting ? "Creating..." : "Create Session"}
+                                </Button>
+                            </DialogFooter>
                         </div>
-
-                        {error && <p className="text-sm text-red-500">{error}</p>}
-                    </div>
-
-                    <DialogFooter>
-                        <Button variant="ghost" onClick={() => { setCreateOpen(false); resetForm() }}>Cancel</Button>
-                        <Button onClick={handleCreateSession} disabled={submitting}>
-                            {submitting ? "Creating..." : "Create Session"}
-                        </Button>
-                    </DialogFooter>
+                    )}
                 </DialogContent>
             </Dialog>
         </div>
