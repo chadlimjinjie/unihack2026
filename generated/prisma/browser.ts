@@ -48,3 +48,9 @@ export type user = Prisma.userModel
  * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
  */
 export type verification = Prisma.verificationModel
+/**
+ * Model occupancy_log
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ */
+export type occupancy_log = Prisma.occupancy_logModel

@@ -30,13 +30,15 @@ model account {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model court {
-  id         BigInt    @id @default(autoincrement())
-  created_at DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at DateTime? @db.Timestamptz(6)
-  name       String?
-  location   String?
-  image      String?
-  review     review[]
+  id            BigInt          @id @default(autoincrement())
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime?       @db.Timestamptz(6)
+  name          String?
+  location      String?
+  image         String?
+  player_live   BigInt?         @default(0)
+  occupancy_log occupancy_log[]
+  review        review[]
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -98,4 +100,16 @@ model verification {
   updatedAt  DateTime @default(now()) @db.Timestamptz(6)
 
   @@index([identifier])
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model occupancy_log {
+  id         BigInt   @id @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  court_id   BigInt?
+  player_ct  BigInt
+  court      court?   @relation(fields: [court_id], references: [id], onDelete: Cascade)
+
+  @@map("occupancy-log")
 }
