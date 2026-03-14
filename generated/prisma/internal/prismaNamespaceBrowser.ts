@@ -104,9 +104,13 @@ export const CourtScalarFieldEnum = {
   name: 'name',
   location: 'location',
   image: 'image',
+<<<<<<< HEAD
   player_live: 'player_live',
   longitude: 'longitude',
   latitude: 'latitude'
+=======
+  player_live: 'player_live'
+>>>>>>> 3c67a24d7e4d03bc61fd57c02dbbed198927a133
 } as const
 
 export type CourtScalarFieldEnum = (typeof CourtScalarFieldEnum)[keyof typeof CourtScalarFieldEnum]

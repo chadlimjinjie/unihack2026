@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
 import { useForm } from "@tanstack/react-form"
 import { redirect } from "next/navigation"
+import Link from "next/link"
 
 export function LoginForm({
   className,
@@ -46,7 +47,7 @@ export function LoginForm({
         },
         onSuccess: (ctx) => {
           // redirect to the dashboard or sign in page
-          redirect("/dashboard")
+          redirect("/")
         }
       })
     }
@@ -130,11 +131,11 @@ export function LoginForm({
               <FieldGroup>
                 <Field>
                   <Button type="submit">Login</Button>
-                  <Button variant="outline" type="button">
+                  {/* <Button variant="outline" type="button">
                     Login with Google
-                  </Button>
+                  </Button> */}
                   <FieldDescription className="text-center">
-                    Don&apos;t have an account? <a href="#">Sign up</a>
+                    Don&apos;t have an account? <Link href="/signup">Sign up</Link>
                   </FieldDescription>
                 </Field>
               </FieldGroup>
