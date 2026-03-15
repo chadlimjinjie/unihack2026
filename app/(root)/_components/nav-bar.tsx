@@ -104,7 +104,7 @@ const defaultNavigationLinks: NavbarNavLink[] = [
     { href: "/", label: "Home" },
     { href: "/courts", label: "Courts" },
     { href: "/sessions", label: "Sessions" },
-    { href: "/about", label: "About" },
+    
 ]
 
 export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
@@ -241,7 +241,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                     ) : (
                                         <div className="text-2xl">{logo}</div>
                                     )}
-                                    <span className="text-xl font-semibold">Bambii</span>
+                                    <span className="text-xl font-semibold">BamBi</span>
                                 </Link>
                             </Button>
                             {/* Navigation menu */}
@@ -308,7 +308,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         )}
-                        {!isSignedIn && (
+                        {!session.data && (
                             <Button
                                 variant="ghost"
                                 asChild
@@ -318,7 +318,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 </Link>
                             </Button>
                         )}
-                        {!isSignedIn && (
+                        {!session.data && (
                             <Button asChild>
                                 <Link href={ctaHref}>
                                     {ctaText}
