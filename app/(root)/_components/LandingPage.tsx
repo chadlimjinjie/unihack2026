@@ -25,7 +25,7 @@ export default async function LandingPage() {
 
                 <div className="relative z-10 w-full max-w-lg space-y-6 text-center">
                     <h1 className="text-5xl font-extrabold md:text-7xl tracking-tight text-black">
-                        Welcome to Bambii
+                        Welcome to BamBii
                     </h1>
                     <p className="text-lg text-gray-700">
                         Find courts, join sessions, and get playing. Your basketball community starts here.
@@ -49,9 +49,9 @@ export default async function LandingPage() {
 
                     {/* Intro */}
                     <div className="text-center space-y-4">
-                        <h2 className="text-3xl md:text-4xl font-bold">What's Bambii?</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold">What's BamBii?</h2>
                         <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-                            Bambii is your go-to app for finding pickup basketball games in your area.
+                            BamBii is your go-to app for finding pickup basketball games in your area.
                             We use Bluetooth sensors to track how busy each court is in real time —
                             so you always know where the runs are happening before you even lace up.
                         </p>

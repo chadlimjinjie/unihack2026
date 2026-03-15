@@ -234,14 +234,14 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                     {!logoError ? (
                                         <img
                                             src="/logo.png"
-                                            alt="BamBi"
+                                            alt="BamBii"
                                             className="h-8 w-8 object-contain"
                                             onError={() => setLogoError(true)}
                                         />
                                     ) : (
                                         <div className="text-2xl">{logo}</div>
                                     )}
-                                    <span className="text-xl font-semibold">BamBi</span>
+                                    <span className="text-xl font-semibold">BamBii</span>
                                 </Link>
                             </Button>
                             {/* Navigation menu */}
