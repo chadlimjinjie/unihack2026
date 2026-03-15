@@ -20,6 +20,7 @@ import Link from "next/link"
 import { signOut, useSession } from "@/lib/auth-client"
 import { usePathname, useRouter } from "next/navigation"
 import { User } from "lucide-react"
+import { ModeToggle } from "@/components/mode-toggle"
 
 // Simple logo component for the navbar
 const Logo = (props: React.SVGAttributes<SVGElement>) => {
@@ -240,7 +241,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                     ) : (
                                         <div className="text-2xl">{logo}</div>
                                     )}
-                                    <span className="text-xl font-semibold">Bambii</span>
+                                    <span className="text-xl font-semibold">BamBi</span>
                                 </Link>
                             </Button>
                             {/* Navigation menu */}
@@ -307,7 +308,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         )}
-                        {!isSignedIn && (
+                        {!session.data && (
                             <Button
                                 variant="ghost"
                                 asChild
@@ -317,13 +318,14 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 </Link>
                             </Button>
                         )}
-                        {!isSignedIn && (
+                        {!session.data && (
                             <Button asChild>
                                 <Link href={ctaHref}>
                                     {ctaText}
                                 </Link>
                             </Button>
                         )}
+                        <ModeToggle />
                     </div>
                 </div>
             </header>
