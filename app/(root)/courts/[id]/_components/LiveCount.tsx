@@ -10,7 +10,7 @@ export default function LiveCount({ count, location_id }: { count: bigint | null
 
     const { client, status, error } = useMqtt();
     const [currentCount, setCurrentCount] = useState({
-        count: 0
+        count: 5
     });
     var test = 0
 
