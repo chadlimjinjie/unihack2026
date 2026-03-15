@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { JSX, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -102,16 +102,19 @@ export default function EmbeddedMap(): JSX.Element {
 
           const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml);
 
-          const marker = new mapboxgl.Marker({ element: el })
-            .setLngLat(coords as [number, number])
-            .setPopup(popup)
-            .addTo(map);
+          if (map) {
+            const marker = new mapboxgl.Marker({ element: el })
+              .setLngLat(coords as [number, number])
+              .setPopup(popup)
+              .addTo(map);
 
-          el.addEventListener('click', () => {
-            map.flyTo({ center: coords as [number, number], zoom: 17, duration: 800 });
-          });
+            el.addEventListener('click', () => {
+              map.flyTo({ center: coords as [number, number], zoom: 17, duration: 800 });
+            });
 
-          markersRef.current.push(marker);
+            markersRef.current.push(marker);
+          }
+
         });
       });
     }
