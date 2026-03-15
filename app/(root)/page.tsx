@@ -1,21 +1,25 @@
-import { Button } from "@/components/ui/button"
+import { prisma } from "@/lib/prisma"
+import { getBusiestCourtInsight } from "@/lib/busiest-court-insight"
 import LandingPage from "./_components/LandingPage"
 
-export default function Page() {
+export default async function Page() {
+  const courts = await prisma.court.findMany({
+    select: { id: true, name: true, player_live: true },
+  })
+  const busiestCourt =
+    courts.length > 0
+      ? courts.reduce((best, c) =>
+          Number(c.player_live ?? 0) > Number(best.player_live ?? 0) ? c : best
+        )
+      : null
+  const busiestCourtInsight =
+    busiestCourt != null
+      ? await getBusiestCourtInsight(busiestCourt.name, busiestCourt.player_live)
+      : null
   return (
-    // <div className="flex min-h-svh p-6">
-    //   <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-    //     <div>
-    //       <h1 className="font-medium">Project ready!</h1>
-    //       <p>You may now add components and start building.</p>
-    //       <p>We&apos;ve already added the button component for you.</p>
-    //       <Button className="mt-2">Button</Button>
-    //     </div>
-    //     <div className="font-mono text-xs text-muted-foreground">
-    //       (Press <kbd>d</kbd> to toggle dark mode)
-    //     </div>
-    //   </div>
-    // </div>
-    <LandingPage />
+    <LandingPage
+      busiestCourt={busiestCourt}
+      busiestCourtInsight={busiestCourtInsight}
+    />
   )
 }

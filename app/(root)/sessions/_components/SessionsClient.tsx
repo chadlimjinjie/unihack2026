@@ -211,7 +211,7 @@ export default function SessionsClient({
             {/* Header */}
             <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold">Open Sessions</h1>
+                    <h1 className="text-title font-bold">Open Sessions</h1>
                     <p className="text-muted-foreground mt-1">Find a game or start your own</p>
                 </div>
                 {currentSession ? (
@@ -232,10 +232,10 @@ export default function SessionsClient({
 
             {/* Sessions list */}
             {sessions.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-24 text-center gap-3">
+                <div className="flex flex-col items-center justify-center rounded-lg border border-border bg-card/50 py-24 text-center gap-3 px-4">
                     <p className="text-5xl">🏀</p>
-                    <p className="text-xl font-semibold">No active sessions</p>
-                    <p className="text-muted-foreground">Be the first to start a game!</p>
+                    <p className="text-xl font-semibold">No open sessions</p>
+                    <p className="text-muted-foreground">Start a session or check back later.</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

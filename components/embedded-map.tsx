@@ -12,7 +12,7 @@ function escapeHtml(text: string): string {
   return div.innerHTML;
 }
 
-export default function EmbeddedMap(): JSX.Element {
+export default function EmbeddedMap(): React.JSX.Element {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -50,6 +50,7 @@ export default function EmbeddedMap(): JSX.Element {
         }
 
         const map = mapRef.current;
+        if (!map) return;
 
         locations.forEach((loc: any) => {
           const coords = loc.coordinates ?? loc.lnglat ?? loc.location;

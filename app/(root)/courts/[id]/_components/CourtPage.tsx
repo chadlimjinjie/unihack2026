@@ -35,6 +35,7 @@ import {
 } from "recharts"
 import { PenLine, Star } from "lucide-react"
 import LiveCount from "./LiveCount";
+import CourtLocationMap from "./CourtLocationMap";
 import { MqttProvider } from "@/components/mqtt/MqttProvider";
 
 const chartConfig: ChartConfig = {
@@ -62,6 +63,8 @@ type Court = {
     image: string | null
     review: Review[]
     player_live: bigint | null
+    latitude: number | null
+    longitude: number | null
 }
 
 type ChartEntry = {
@@ -175,7 +178,7 @@ export default function CourtPage({
             <div className="container mx-auto p-8 max-w-4xl">
 
                 {/* Court Name */}
-                <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-gradient-to-r from-foreground to-primary/80 bg-clip-text text-transparent">
+                <h1 className="text-title font-bold text-center mb-8 bg-gradient-to-r from-foreground to-primary/80 bg-clip-text text-transparent">
                     {court?.name ?? "Court Name"}
                 </h1>
 
@@ -194,7 +197,7 @@ export default function CourtPage({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                     <Card className="w-full">
                         <CardHeader>
-                            <CardTitle className="text-xl">Location</CardTitle>
+                            <CardTitle className="text-xl font-semibold">Location</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <Label className="text-lg">
@@ -202,13 +205,32 @@ export default function CourtPage({
                             </Label>
                         </CardContent>
                     </Card>
-                    <LiveCount count={court?.player_live} location_id={court?.id.toString() ?? ""} />
+                    <LiveCount count={court?.player_live} courtId={court?.id.toString() ?? ""} />
                 </div>
+
+                {/* Map - where the court is */}
+                {court?.latitude != null && court?.longitude != null && (
+                    <Card className="mb-12">
+                        <CardHeader>
+                            <CardTitle className="text-xl font-semibold">Where to find it</CardTitle>
+                            <CardDescription>
+                                Court location on the map
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <CourtLocationMap
+                                latitude={court.latitude}
+                                longitude={court.longitude}
+                                courtName={court.name}
+                            />
+                        </CardContent>
+                    </Card>
+                )}
 
                 {/* Line Chart */}
                 <Card className="mb-12">
                     <CardHeader>
-                        <CardTitle className="text-2xl">Court Usage Over Time</CardTitle>
+                        <CardTitle className="text-xl font-semibold">Court Usage Over Time</CardTitle>
                         <CardDescription>
                             {chartData.length > 0
                                 ? `Player count throughout last ${dayLabel}`
@@ -247,7 +269,7 @@ export default function CourtPage({
                 <Card>
                     <CardHeader>
                         <div className="flex items-center justify-between flex-wrap gap-4">
-                            <CardTitle className="text-2xl">Reviews & Rating</CardTitle>
+                            <CardTitle className="text-xl font-semibold">Reviews & Rating</CardTitle>
                             {session ? (
                                 <Button onClick={() => setDialogOpen(true)} className="gap-2">
                                     <PenLine className="w-4 h-4" /> {hasReviewed ? "Edit Your Review" : "Write a Review"}

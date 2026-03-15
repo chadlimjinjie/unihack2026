@@ -16,12 +16,18 @@ export default async function RootLayout({
 
     return (
         <div>
+            <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:outline-none"
+            >
+                Skip to main content
+            </a>
             <Navbar serverSession={serverSession} />
-            <div className="flex flex-1 flex-col">
+            <main id="main-content" className="flex flex-1 flex-col">
                 <div className="@container/main flex flex-1 flex-col gap-2">
                     {children}
                 </div>
-            </div>
+            </main>
         </div>
     )
 }

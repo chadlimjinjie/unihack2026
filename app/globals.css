@@ -30,6 +30,12 @@
     --chart-4: oklch(0.488 0.243 264.376);
     --chart-5: oklch(0.424 0.199 265.638);
     --radius: 0.625rem;
+    --text-display: 2.25rem;
+    --text-title: 1.5rem;
+    --text-body: 1rem;
+    --text-caption: 0.875rem;
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -120,13 +126,44 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
   html {
     @apply font-sans;
-    }
+  }
+  .text-display {
+    font-size: var(--text-display);
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+  }
+  .text-title {
+    font-size: var(--text-title);
+    line-height: var(--leading-tight);
+  }
+  .text-body {
+    font-size: var(--text-body);
+    line-height: var(--leading-normal);
+  }
+  .text-caption {
+    font-size: var(--text-caption);
+    line-height: var(--leading-normal);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .landingBackground {
