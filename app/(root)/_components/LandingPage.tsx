@@ -24,10 +24,10 @@ export default async function LandingPage() {
                 </div>
 
                 <div className="relative z-10 w-full max-w-lg space-y-6 text-center">
-                    <h1 className="text-5xl font-extrabold text-foreground md:text-7xl tracking-tight">
+                    <h1 className="text-5xl font-extrabold md:text-7xl tracking-tight text-black">
                         Welcome to Bambii
                     </h1>
-                    <p className="text-lg text-muted-foreground">
+                    <p className="text-lg text-gray-700">
                         Find courts, join sessions, and get playing. Your basketball community starts here.
                     </p>
                     <div className="flex flex-wrap justify-center gap-3 pt-2">
