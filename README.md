@@ -1,4 +1,4 @@
-UNIHACK 2026 - BAM B(ball)
+UNIHACK 2026 - BamBi
 
  Court Activity
 
