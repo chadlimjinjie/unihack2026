@@ -119,7 +119,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      placeholder="Login button not working on mobile"
+                      placeholder="John Doe"
                       autoComplete="off"
                     />
                   </Field>

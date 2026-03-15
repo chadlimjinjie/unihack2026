@@ -20,6 +20,7 @@ import Link from "next/link"
 import { signOut, useSession } from "@/lib/auth-client"
 import { usePathname, useRouter } from "next/navigation"
 import { User } from "lucide-react"
+import { ModeToggle } from "@/components/mode-toggle"
 
 // Simple logo component for the navbar
 const Logo = (props: React.SVGAttributes<SVGElement>) => {
@@ -104,7 +105,6 @@ const defaultNavigationLinks: NavbarNavLink[] = [
     { href: "/", label: "Home" },
     { href: "/courts", label: "Courts" },
     { href: "/sessions", label: "Sessions" },
-    { href: "/about", label: "About" },
 ]
 
 export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
@@ -325,6 +325,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 </Link>
                             </Button>
                         )}
+                        <ModeToggle />
                     </div>
                 </div>
             </header>
